@@ -1,0 +1,6 @@
+framework module Pods_SinemaHabits {
+  umbrella header "Pods-SinemaHabits-umbrella.h"
+
+  export *
+  module * { export * }
+}
