@@ -11,6 +11,9 @@ class MainViewController: UIViewController {
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController?.navigationBar.shadowImage = UIImage()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-    }
     
+        NetworkManager.shared.fetchCinema { result in
+            print(result.id)
+        }
+    }
 }
