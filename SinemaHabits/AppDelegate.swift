@@ -7,14 +7,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let navController = UINavigationController(rootViewController: MainViewController())
-        navController.navigationBar.prefersLargeTitles = false
+        
+        let controller = MainViewController()
+        let navController = UINavigationController(rootViewController: controller)
+        navController.navigationBar.prefersLargeTitles = true
         navController.navigationBar.isHidden = false
-        navController.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.clear]
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = navController
-        window.makeKeyAndVisible()
         self.window = window
+        window.makeKeyAndVisible()
+
         return true
     }
 }
