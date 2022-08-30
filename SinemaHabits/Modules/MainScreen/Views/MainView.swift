@@ -17,5 +17,6 @@ class MainView: UIView {
         searchBar.sizeToFit()
         searchBar.placeholder = "Введи название фильма"
         searchBar.setValue("Отмена", forKey: "cancelButtonText")
+
     }
 }
