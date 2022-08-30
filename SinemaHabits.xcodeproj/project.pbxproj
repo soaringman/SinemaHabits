@@ -18,10 +18,11 @@
 		1184A2B128BD33E8000D9497 /* DetailsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184A2B028BD33E8000D9497 /* DetailsModels.swift */; };
 		1184A2B328BD3408000D9497 /* MainScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184A2B228BD3408000D9497 /* MainScreenModel.swift */; };
 		1184A2B528BD341E000D9497 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184A2B428BD341E000D9497 /* MainView.swift */; };
-		77891BC5DB826E8BE8E50343 /* Pods_SinemaHabits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 949559330C80B9E84D1B7D1E /* Pods_SinemaHabits.framework */; };
+		9ED4EAB6D541E1F3EE19961D /* Pods_SinemaHabits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922F077B1BA070CC94C62ABA /* Pods_SinemaHabits.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		080A753F62D29D4F51FE9FFC /* Pods-SinemaHabits.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SinemaHabits.release.xcconfig"; path = "Target Support Files/Pods-SinemaHabits/Pods-SinemaHabits.release.xcconfig"; sourceTree = "<group>"; };
 		1184A28328BD2F75000D9497 /* SinemaHabits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SinemaHabits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1184A28628BD2F75000D9497 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1184A28A28BD2F75000D9497 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -35,9 +36,8 @@
 		1184A2B028BD33E8000D9497 /* DetailsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsModels.swift; sourceTree = "<group>"; };
 		1184A2B228BD3408000D9497 /* MainScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenModel.swift; sourceTree = "<group>"; };
 		1184A2B428BD341E000D9497 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		949559330C80B9E84D1B7D1E /* Pods_SinemaHabits.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SinemaHabits.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		DB9FE1202FA73AEC9145A530 /* Pods-SinemaHabits.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SinemaHabits.debug.xcconfig"; path = "Target Support Files/Pods-SinemaHabits/Pods-SinemaHabits.debug.xcconfig"; sourceTree = "<group>"; };
-		F62F47397F9C2A01BBEE87E6 /* Pods-SinemaHabits.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SinemaHabits.release.xcconfig"; path = "Target Support Files/Pods-SinemaHabits/Pods-SinemaHabits.release.xcconfig"; sourceTree = "<group>"; };
+		922F077B1BA070CC94C62ABA /* Pods_SinemaHabits.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SinemaHabits.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD79FF6BA8A61CA978A53793 /* Pods-SinemaHabits.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SinemaHabits.debug.xcconfig"; path = "Target Support Files/Pods-SinemaHabits/Pods-SinemaHabits.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,7 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77891BC5DB826E8BE8E50343 /* Pods_SinemaHabits.framework in Frameworks */,
+				9ED4EAB6D541E1F3EE19961D /* Pods_SinemaHabits.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -58,7 +58,7 @@
 				1184A28528BD2F75000D9497 /* SinemaHabits */,
 				1184A28428BD2F75000D9497 /* Products */,
 				340952BC75ECDA2D26743223 /* Pods */,
-				9F32A6FEDC72CEFA5959E2A8 /* Frameworks */,
+				9C7E830550B994212707EB4B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -180,16 +180,16 @@
 		340952BC75ECDA2D26743223 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DB9FE1202FA73AEC9145A530 /* Pods-SinemaHabits.debug.xcconfig */,
-				F62F47397F9C2A01BBEE87E6 /* Pods-SinemaHabits.release.xcconfig */,
+				DD79FF6BA8A61CA978A53793 /* Pods-SinemaHabits.debug.xcconfig */,
+				080A753F62D29D4F51FE9FFC /* Pods-SinemaHabits.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		9F32A6FEDC72CEFA5959E2A8 /* Frameworks */ = {
+		9C7E830550B994212707EB4B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				949559330C80B9E84D1B7D1E /* Pods_SinemaHabits.framework */,
+				922F077B1BA070CC94C62ABA /* Pods_SinemaHabits.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -201,12 +201,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1184A29A28BD2F77000D9497 /* Build configuration list for PBXNativeTarget "SinemaHabits" */;
 			buildPhases = (
-				97E97D755FFE6240DA9200BA /* [CP] Check Pods Manifest.lock */,
+				D4DA0DF0F1750B4CC935492B /* [CP] Check Pods Manifest.lock */,
 				1184A2B628BD354B000D9497 /* SwiftLint */,
 				1184A27F28BD2F75000D9497 /* Sources */,
 				1184A28028BD2F75000D9497 /* Frameworks */,
 				1184A28128BD2F75000D9497 /* Resources */,
-				0CD372C849C1868A71D791BE /* [CP] Embed Pods Frameworks */,
+				F63A5208F7C6477B0B22D77B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -263,23 +263,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0CD372C849C1868A71D791BE /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SinemaHabits/Pods-SinemaHabits-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SinemaHabits/Pods-SinemaHabits-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SinemaHabits/Pods-SinemaHabits-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		1184A2B628BD354B000D9497 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 12;
@@ -298,7 +281,7 @@
 			shellPath = /bin/sh;
 			shellScript = "${PODS_ROOT}/SwiftLint/swiftlint\n";
 		};
-		97E97D755FFE6240DA9200BA /* [CP] Check Pods Manifest.lock */ = {
+		D4DA0DF0F1750B4CC935492B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -318,6 +301,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F63A5208F7C6477B0B22D77B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SinemaHabits/Pods-SinemaHabits-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SinemaHabits/Pods-SinemaHabits-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SinemaHabits/Pods-SinemaHabits-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -469,7 +469,7 @@
 		};
 		1184A29B28BD2F77000D9497 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DB9FE1202FA73AEC9145A530 /* Pods-SinemaHabits.debug.xcconfig */;
+			baseConfigurationReference = DD79FF6BA8A61CA978A53793 /* Pods-SinemaHabits.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -499,7 +499,7 @@
 		};
 		1184A29C28BD2F77000D9497 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F62F47397F9C2A01BBEE87E6 /* Pods-SinemaHabits.release.xcconfig */;
+			baseConfigurationReference = 080A753F62D29D4F51FE9FFC /* Pods-SinemaHabits.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

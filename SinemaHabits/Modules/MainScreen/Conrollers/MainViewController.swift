@@ -1,10 +1,16 @@
 import UIKit
 
 class MainViewController: UIViewController {
-
+    
+    let mainView = MainView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        mainView.setupSearchBar()
+        navigationItem.titleView = mainView.searchBar
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
-
+    
 }
