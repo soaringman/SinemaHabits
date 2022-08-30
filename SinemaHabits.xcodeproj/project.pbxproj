@@ -18,7 +18,11 @@
 		1184A2B128BD33E8000D9497 /* DetailsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184A2B028BD33E8000D9497 /* DetailsModels.swift */; };
 		1184A2B328BD3408000D9497 /* MainScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184A2B228BD3408000D9497 /* MainScreenModel.swift */; };
 		1184A2B528BD341E000D9497 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184A2B428BD341E000D9497 /* MainView.swift */; };
+		11A8E49D28BE20CA0016ED51 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8E49C28BE20CA0016ED51 /* ErrorView.swift */; };
+		11A8E49F28BE320F0016ED51 /* SearchErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8E49E28BE320F0016ED51 /* SearchErrorView.swift */; };
 		9ED4EAB6D541E1F3EE19961D /* Pods_SinemaHabits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922F077B1BA070CC94C62ABA /* Pods_SinemaHabits.framework */; };
+		9F3BDD2B28BE457100E3F988 /* MainScreenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BDD2A28BE457100E3F988 /* MainScreenCell.swift */; };
+		9F3BDD2E28BE4F0400E3F988 /* NetworkAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BDD2D28BE4F0400E3F988 /* NetworkAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +40,11 @@
 		1184A2B028BD33E8000D9497 /* DetailsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsModels.swift; sourceTree = "<group>"; };
 		1184A2B228BD3408000D9497 /* MainScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenModel.swift; sourceTree = "<group>"; };
 		1184A2B428BD341E000D9497 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		11A8E49C28BE20CA0016ED51 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		11A8E49E28BE320F0016ED51 /* SearchErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchErrorView.swift; sourceTree = "<group>"; };
 		922F077B1BA070CC94C62ABA /* Pods_SinemaHabits.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SinemaHabits.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F3BDD2A28BE457100E3F988 /* MainScreenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenCell.swift; sourceTree = "<group>"; };
+		9F3BDD2D28BE4F0400E3F988 /* NetworkAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAlert.swift; sourceTree = "<group>"; };
 		DD79FF6BA8A61CA978A53793 /* Pods-SinemaHabits.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SinemaHabits.debug.xcconfig"; path = "Target Support Files/Pods-SinemaHabits/Pods-SinemaHabits.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +84,7 @@
 				1184A28628BD2F75000D9497 /* AppDelegate.swift */,
 				1184A29E28BD313C000D9497 /* Modules */,
 				1184A29D28BD3088000D9497 /* Network */,
+				9F3BDD2C28BE4ED600E3F988 /* Utils */,
 				1184A2A928BD32F1000D9497 /* Resources */,
 				1184A28F28BD2F75000D9497 /* SinemaHabits.xcdatamodeld */,
 			);
@@ -131,6 +140,11 @@
 			isa = PBXGroup;
 			children = (
 				1184A2B428BD341E000D9497 /* MainView.swift */,
+
+				9F3BDD2A28BE457100E3F988 /* MainScreenCell.swift */,
+
+				11A8E4A028BE33540016ED51 /* ErrorView */,
+
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -177,6 +191,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		11A8E4A028BE33540016ED51 /* ErrorView */ = {
+			isa = PBXGroup;
+			children = (
+				11A8E49C28BE20CA0016ED51 /* ErrorView.swift */,
+				11A8E49E28BE320F0016ED51 /* SearchErrorView.swift */,
+			);
+			path = ErrorView;
+			sourceTree = "<group>";
+		};
 		340952BC75ECDA2D26743223 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +215,14 @@
 				922F077B1BA070CC94C62ABA /* Pods_SinemaHabits.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9F3BDD2C28BE4ED600E3F988 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9F3BDD2D28BE4F0400E3F988 /* NetworkAlert.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -329,8 +360,15 @@
 			files = (
 				1184A28B28BD2F75000D9497 /* MainViewController.swift in Sources */,
 				1184A2B528BD341E000D9497 /* MainView.swift in Sources */,
+				11A8E49F28BE320F0016ED51 /* SearchErrorView.swift in Sources */,
 				1184A29128BD2F75000D9497 /* SinemaHabits.xcdatamodeld in Sources */,
+
+				9F3BDD2E28BE4F0400E3F988 /* NetworkAlert.swift in Sources */,
+
+				11A8E49D28BE20CA0016ED51 /* ErrorView.swift in Sources */,
+
 				1184A2AB28BD333B000D9497 /* CinemaModel.swift in Sources */,
+				9F3BDD2B28BE457100E3F988 /* MainScreenCell.swift in Sources */,
 				1184A2B128BD33E8000D9497 /* DetailsModels.swift in Sources */,
 				1184A28728BD2F75000D9497 /* AppDelegate.swift in Sources */,
 				1184A2AD28BD338D000D9497 /* DetailsViewController.swift in Sources */,
