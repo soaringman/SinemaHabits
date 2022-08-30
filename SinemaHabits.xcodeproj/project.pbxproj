@@ -18,6 +18,7 @@
 		1184A2B128BD33E8000D9497 /* DetailsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184A2B028BD33E8000D9497 /* DetailsModels.swift */; };
 		1184A2B328BD3408000D9497 /* MainScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184A2B228BD3408000D9497 /* MainScreenModel.swift */; };
 		1184A2B528BD341E000D9497 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184A2B428BD341E000D9497 /* MainView.swift */; };
+		11A8E49D28BE20CA0016ED51 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8E49C28BE20CA0016ED51 /* ErrorView.swift */; };
 		9ED4EAB6D541E1F3EE19961D /* Pods_SinemaHabits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922F077B1BA070CC94C62ABA /* Pods_SinemaHabits.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +37,7 @@
 		1184A2B028BD33E8000D9497 /* DetailsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsModels.swift; sourceTree = "<group>"; };
 		1184A2B228BD3408000D9497 /* MainScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenModel.swift; sourceTree = "<group>"; };
 		1184A2B428BD341E000D9497 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		11A8E49C28BE20CA0016ED51 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		922F077B1BA070CC94C62ABA /* Pods_SinemaHabits.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SinemaHabits.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD79FF6BA8A61CA978A53793 /* Pods-SinemaHabits.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SinemaHabits.debug.xcconfig"; path = "Target Support Files/Pods-SinemaHabits/Pods-SinemaHabits.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				1184A2B428BD341E000D9497 /* MainView.swift */,
+				11A8E49C28BE20CA0016ED51 /* ErrorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				1184A28B28BD2F75000D9497 /* MainViewController.swift in Sources */,
 				1184A2B528BD341E000D9497 /* MainView.swift in Sources */,
 				1184A29128BD2F75000D9497 /* SinemaHabits.xcdatamodeld in Sources */,
+				11A8E49D28BE20CA0016ED51 /* ErrorView.swift in Sources */,
 				1184A2AB28BD333B000D9497 /* CinemaModel.swift in Sources */,
 				1184A2B128BD33E8000D9497 /* DetailsModels.swift in Sources */,
 				1184A28728BD2F75000D9497 /* AppDelegate.swift in Sources */,
