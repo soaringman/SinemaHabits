@@ -10,7 +10,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let controller = MainViewController()
         let navController = UINavigationController(rootViewController: controller)
-        navController.navigationBar.prefersLargeTitles = true
+//        navController.navigationBar.prefersLargeTitles = false
         navController.navigationBar.isHidden = false
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = navController
