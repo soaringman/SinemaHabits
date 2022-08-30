@@ -6,10 +6,12 @@ class MainView: UIView {
     
     // UI Elements
     
-    public lazy var searchBar = UISearchBar()
     private lazy var tableView: UITableView = UITableView(frame: self.bounds, style: .plain)
     public lazy var refreshControl = UIRefreshControl()
-    
+    public lazy var searchController = UISearchController(searchResultsController: nil)
+
+    public lazy var titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 360, height: 40))
+        
     // MARK: - Initialization
     
     override init(frame: CGRect) {
@@ -45,6 +47,16 @@ class MainView: UIView {
         
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        
+        searchController.searchBar.placeholder = "Search cinema..."
+        searchController.searchBar.tintColor = .black
+        searchController.navigationItem.hidesSearchBarWhenScrolling = false
+        
+//        ToDo переделать это говно
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        titleLabel.textAlignment = .left
+        titleLabel.text = "Home"
+        
     }
     
     @objc private func refreshData() {
@@ -53,14 +65,6 @@ class MainView: UIView {
     
     // MARK: - Public methods
     
-    func setupSearchBar() {
-        
-        searchBar.sizeToFit()
-        searchBar.placeholder = "Введи название фильма"
-        searchBar.setValue("Отмена", forKey: "cancelButtonText")
-        searchBar.showsCancelButton = true
-
-    }
 }
 
 // MARK: - UITableViewDataSource

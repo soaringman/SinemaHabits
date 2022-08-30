@@ -27,7 +27,9 @@ func isInternetAvailable() -> Bool {
 
     func showAlert() {
         if !isInternetAvailable() {
-            let alert = UIAlertController(title: "Ошибка", message: "Проверьте интернет соединение", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Ошибка",
+                                          message: "Проверьте интернет соединение",
+                                          preferredStyle: .alert)
             let action = UIAlertAction(title: "Закрыть", style: .default, handler: nil)
             alert.addAction(action)
             present(alert, animated: true, completion: nil)
