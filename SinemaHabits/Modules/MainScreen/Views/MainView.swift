@@ -9,9 +9,12 @@ class MainView: UIView {
     private lazy var tableView: UITableView = UITableView(frame: self.bounds, style: .plain)
     public lazy var refreshControl = UIRefreshControl()
     public lazy var searchController = UISearchController(searchResultsController: nil)
-
     public lazy var titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 360, height: 40))
-        
+    private var networkManager = NetworkManager()
+    private var api = Api()
+    
+    private var cinemaDataModel: [FilmAndTVResult] = []
+    
     // MARK: - Initialization
     
     override init(frame: CGRect) {
@@ -20,7 +23,7 @@ class MainView: UIView {
         setupUI()
         setupConstraints()
         setupDelegates()
-        
+        getData()
     }
     
     required init?(coder: NSCoder) {
@@ -42,7 +45,9 @@ class MainView: UIView {
     }
     
     private func setupUI() {
+        
         tableView.register(MainScreenCell.self, forCellReuseIdentifier: MainScreenCell.reuseID)
+        
         tableView.backgroundColor = .white
         
         tableView.refreshControl = refreshControl
@@ -52,47 +57,57 @@ class MainView: UIView {
         searchController.searchBar.tintColor = .black
         searchController.navigationItem.hidesSearchBarWhenScrolling = false
         
-//        ToDo переделать это говно
+        //        ToDo переделать это говно
         titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
         titleLabel.textAlignment = .left
         titleLabel.text = "Home"
         
     }
     
+    private func getData() {
+        let baseURL = api.baseURL
+ //       let pageURL = "?page=\(pageNumber)"
+        networkManager.fetchData(url: baseURL)
+        networkManager.delegate = self
+    }
+    
     @objc private func refreshData() {
         self.refresh?()
     }
-    
-    // MARK: - Public methods
-    
 }
 
 // MARK: - UITableViewDataSource
 
-extension MainView: UITableViewDataSource {
-
+extension MainView: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        10
+        return cinemaDataModel.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         if let cell = tableView.dequeueReusableCell(withIdentifier: MainScreenCell.reuseID,
                                                     for: indexPath) as? MainScreenCell {
-            
-//            let data = self.datas[indexPath.row]
-            cell.filmDescription.text = "Привет!"
+
+            let data = cinemaDataModel[indexPath.row]
+            cell.setupCell(from: data)
             return cell
         }
         return UITableViewCell()
     }
-}
-
-// MARK: - UITableViewDelegate
-
-extension MainView: UITableViewDelegate {
-
+        
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150
+    }
+}
+
+extension MainView: NetworkManagerDelegate {
+    func showData(results: [FilmAndTVResult]) {
+        cinemaDataModel = results
+        tableView.reloadData()
+    }
+    
+    func showError() {
+        print("Error koroche")
     }
 }

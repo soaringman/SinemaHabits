@@ -8,24 +8,18 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Верните серч бар"
         self.view = mainView
-        searchBar.delegate = self
+        
+        setupDelegates()
         refresh()
         setupSearchBar()
-        NetworkManager.shared.fetchCinema { result in
-            print(result.results)
-            
-            /*
-             let id: Int
-             let overview: String
-             let popularity: Double
-             let posterPath: String
-             let releaseDate: String
-             let title: String
-             let voteAverage: Double
-             */
-        }
+    }
+    
+    // MARK: - Private methods
+    
+    private func setupDelegates() {
+        searchBar.delegate = self
+        mainView.searchController.searchBar.delegate = self
     }
     
     private func refresh() {
@@ -58,10 +52,11 @@ class MainViewController: UIViewController {
         self.navigationItem.titleView = mainView.titleLabel
         self.navigationItem.searchController = mainView.searchController
         navigationItem.hidesSearchBarWhenScrolling = false
-        mainView.searchController.searchBar.delegate = self
-        
+
     }
 }
+
+// MARK: - Extensions
 
 extension MainViewController: UISearchBarDelegate {
     

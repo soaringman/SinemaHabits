@@ -21,7 +21,7 @@ struct FilmAndTVResult: Codable {
     let releaseDate: String?
     let title: String?
     let voteAverage: Double
-    //for TV (serials)
+    // for TV (serials)
     let firstAirDate: String?
     let name: String?
     
@@ -34,7 +34,7 @@ struct FilmAndTVResult: Codable {
         case releaseDate = "release_date"
         case title
         case voteAverage = "vote_average"
-        //for TV (serials)
+        // for TV (serials)
         case firstAirDate = "first_air_date"
         case name
     }
@@ -42,7 +42,9 @@ struct FilmAndTVResult: Codable {
 
 /*
  example movie:
- https://api.themoviedb.org/3/discover/movie?api_key=<<api_key>>&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate
+https://api.themoviedb.org/3/discover/movie?api_key
+ =<<api_key>>&language=en-US&sort_by=popularity.
+ desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate
  */
 
 /*
