@@ -8,10 +8,15 @@ class MainScreenCell: UITableViewCell {
     
     // MARK: - UI elements
     
-    public lazy var filmPoster = UIImageView()
-    public lazy var filmTitle = UILabel()
-    public lazy var filmDescription = UILabel()
-    public lazy var filmStartDate = UILabel()
+    private lazy var filmPoster = UIImageView()
+    
+    var cellImage: UIImage? {
+        return filmPoster.image
+    }
+    
+    private lazy var filmTitle = UILabel()
+    private lazy var filmDescription = UILabel()
+    private lazy var filmStartDate = UILabel()
     private lazy var contentStack = UIStackView(arrangedSubviews: [filmTitle, filmDescription, filmStartDate])
     
     // MARK: - Initialization
@@ -33,10 +38,12 @@ class MainScreenCell: UITableViewCell {
         self.selectionStyle = .none
         
         contentStack.axis = .vertical
-        contentStack.distribution = .fillProportionally
+        contentStack.distribution = .fillEqually
         
         filmPoster.layer.cornerRadius = 15
-        filmPoster.backgroundColor = .cyan
+        filmPoster.backgroundColor = .black
+        filmPoster.contentMode = .scaleToFill
+        filmPoster.clipsToBounds = true
         
         filmTitle.font = UIFont.boldSystemFont(ofSize: 20)
         
@@ -51,13 +58,28 @@ class MainScreenCell: UITableViewCell {
         contentView.addSubview(filmPoster)
         filmPoster.snp.makeConstraints {
             $0.left.top.equalToSuperview().inset(10)
-            $0.height.width.equalTo(130)
+            $0.height.equalTo(130)
+            $0.width.equalTo(100)
         }
         
         contentView.addSubview(contentStack)
         contentStack.snp.makeConstraints {
             $0.left.equalTo(filmPoster.snp.right).offset(10)
             $0.top.bottom.right.equalToSuperview().inset(10)
+        }
+    }
+    
+    func setupCell(from model: FilmAndTVResult) {
+        filmTitle.text = model.name
+        filmDescription.text = model.overview
+        filmStartDate.text = model.firstAirDate
+        DispatchQueue.global().async {
+            let url = "https://image.tmdb.org/t/p/w154\(model.posterPath)"
+            guard let imageUrl = URL(string: url) else { return }
+            guard let imageData = try? Data(contentsOf: imageUrl) else { return }
+            DispatchQueue.main.async {
+                self.filmPoster.image = UIImage(data: imageData)
+            }
         }
     }
     
