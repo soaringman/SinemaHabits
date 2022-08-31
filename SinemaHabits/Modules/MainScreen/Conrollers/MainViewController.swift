@@ -13,6 +13,19 @@ class MainViewController: UIViewController {
         searchBar.delegate = self
         refresh()
         setupSearchBar()
+        NetworkManager.shared.fetchCinema { result in
+            print(result.results)
+            
+            /*
+             let id: Int
+             let overview: String
+             let popularity: Double
+             let posterPath: String
+             let releaseDate: String
+             let title: String
+             let voteAverage: Double
+             */
+        }
     }
     
     private func refresh() {
