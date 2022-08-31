@@ -81,7 +81,9 @@ extension MainView: UITableViewDataSource {
                                                     for: indexPath) as? MainScreenCell {
             
 //            let data = self.datas[indexPath.row]
-            cell.filmDescription.text = "Привет!"
+            cell.filmTitle.text = "Привет!"
+            cell.filmDescription.text = "Описание фильма или сериалаОписание фильма или сериала"
+            cell.filmStartDate.text = "Дата выхода: 12.12.12"
             return cell
         }
         return UITableViewCell()
