@@ -59,27 +59,6 @@ class MainScreenCell: UITableViewCell {
             $0.left.equalTo(filmPoster.snp.right).offset(10)
             $0.top.bottom.right.equalToSuperview().inset(10)
         }
-//        
-//        contentView.addSubview(filmTitle)
-//        filmTitle.snp.makeConstraints {
-//            $0.left.equalTo(filmPoster.snp.right).offset(10)
-//            $0.top.equalToSuperview().inset(10)
-//        }
-//        
-//        contentView.addSubview(filmDescription)
-//        filmDescription.snp.makeConstraints {
-//            $0.top.equalTo(filmTitle.snp.bottom).offset(5)
-//            $0.left.equalTo(filmPoster.snp.right).offset(10)
-//            $0.right.equalToSuperview().inset(5)
-//            $0.bottom.equalTo(filmStartDate.snp.top).inset(5)
-//        }
-//        
-//        contentView.addSubview(filmStartDate)
-//        filmStartDate.snp.makeConstraints {
-//            $0.left.equalTo(filmPoster.snp.right).offset(10)
-//            $0.bottom.equalToSuperview().inset(10)
-//        }
-        
     }
     
 }
