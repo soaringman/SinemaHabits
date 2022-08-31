@@ -29,7 +29,7 @@ class MainViewController: UIViewController {
             guard let self = self else { return }
             
             if self.isInternetAvailable() {
-                //           model.refreshTable()
+                self.mainView.getData()
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                     self.mainView.refreshControl.endRefreshing()
                 })
