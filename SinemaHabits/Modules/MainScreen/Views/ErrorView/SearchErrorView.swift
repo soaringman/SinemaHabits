@@ -6,12 +6,20 @@ class SearchErrorView: UIView {
     private let searchErrorLabel = UILabel()
     private let tryToCorrectLabel = UILabel()
 
-    func setupView() {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
         addSubview(loupe)
         addSubview(searchErrorLabel)
         addSubview(tryToCorrectLabel)
         
+        setupUI()
         setupConstraints()
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setupUI() {
