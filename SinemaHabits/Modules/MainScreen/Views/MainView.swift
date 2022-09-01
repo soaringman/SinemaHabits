@@ -1,6 +1,6 @@
 import UIKit
 
-class MainView: UIView {
+final class MainView: UIView {
     
     var refresh: (() -> Void)?
     
@@ -48,8 +48,6 @@ class MainView: UIView {
         
         tableView.register(MainScreenCell.self, forCellReuseIdentifier: MainScreenCell.reuseID)
         
-        tableView.backgroundColor = .white
-        
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         
@@ -57,7 +55,7 @@ class MainView: UIView {
         searchController.searchBar.tintColor = .black
         searchController.navigationItem.hidesSearchBarWhenScrolling = false
         
-        //        ToDo переделать это говно
+        // ToDo переделать это говно
         titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
         titleLabel.textAlignment = .left
         titleLabel.text = "Home"
@@ -66,7 +64,7 @@ class MainView: UIView {
     
     func getData() {
         let baseURL = api.baseURL
- //       let pageURL = "?page=\(pageNumber)"
+        //       let pageURL = "?page=\(pageNumber)"
         networkManager.fetchData(url: baseURL)
         networkManager.delegate = self
     }
@@ -85,20 +83,21 @@ extension MainView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
+        
         if let cell = tableView.dequeueReusableCell(withIdentifier: MainScreenCell.reuseID,
                                                     for: indexPath) as? MainScreenCell {
-
+            
             let data = cinemaDataModel[indexPath.row]
             cell.setupCell(from: data)
             return cell
         }
         return UITableViewCell()
     }
-        
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 210
     }
+    
 }
 
 extension MainView: NetworkManagerDelegate {
@@ -108,6 +107,6 @@ extension MainView: NetworkManagerDelegate {
     }
     
     func showError() {
-        print("Error koroche")
+        print("Ошибка получения данных")
     }
 }
