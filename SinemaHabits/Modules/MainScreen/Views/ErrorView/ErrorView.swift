@@ -1,19 +1,22 @@
 import UIKit
+import SnapKit
 
 class ErrorView: UIView {
     
-    private let NLOImageView = UIImageView()
-    private let titleLabel = UILabel()
-    private let subTitleLabel = UILabel()
-    private let tryAgainButton = UIButton()
+    private lazy var NLOImageView = UIImageView()
+    private lazy var titleLabel = UILabel()
+    private lazy var subTitleLabel = UILabel()
+    private lazy var tryAgainButton = UIButton()
 
-    func setupView() {
-        addSubview(NLOImageView)
-        addSubview(titleLabel)
-        addSubview(subTitleLabel)
-        addSubview(tryAgainButton)
-        
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .white
+        setupUI()
         setupConstraints()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setupUI() {
@@ -33,34 +36,34 @@ class ErrorView: UIView {
         
         tryAgainButton.backgroundColor = .clear
         tryAgainButton.setTitle("Попробовать снова", for: .normal)
-        tryAgainButton.setTitleColor(UIColor(red: 101/255, green: 52/255, blue: 1, alpha: 1), for: .normal)
+        tryAgainButton.setTitleColor(.systemBlue, for: .normal)
         tryAgainButton.setTitle("Меня нажали", for: .highlighted)
         tryAgainButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
     }
     
     private func setupConstraints() {
-        NLOImageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            NLOImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            NLOImageView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: -50)
-        ])
+        addSubview(NLOImageView)
+        NLOImageView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(-50)
+        }
         
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: NLOImageView.bottomAnchor, constant: 8)
-        ])
+        addSubview(titleLabel)
+        titleLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(NLOImageView.snp.bottom).offset(8)
+        }
         
-        subTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            subTitleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            subTitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12)
-        ])
+        addSubview(subTitleLabel)
+        subTitleLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(titleLabel.snp.bottom).offset(12)
+        }
         
-        tryAgainButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            tryAgainButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            tryAgainButton.topAnchor.constraint(equalTo: subTitleLabel.bottomAnchor, constant: 12)
-        ])
+        addSubview(tryAgainButton)
+        tryAgainButton.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(subTitleLabel.snp.bottom).offset(12)
+        }
     }
 }
