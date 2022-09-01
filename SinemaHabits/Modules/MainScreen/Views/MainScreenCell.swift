@@ -1,10 +1,12 @@
 import UIKit
 import SnapKit
+import CloudKit
 
-class MainScreenCell: UITableViewCell {
+final class MainScreenCell: UITableViewCell {
     
     // ReuseID
     static let reuseID = "Cell"
+    private let mainScreenModel = MainScreenModel()
     
     // MARK: - UI elements
     
@@ -20,7 +22,7 @@ class MainScreenCell: UITableViewCell {
     private lazy var contentStack = UIStackView(arrangedSubviews: [filmTitle, filmDescription, filmStartDate])
     private lazy var circleView = UIView()
     private lazy var ratingTitle = UILabel()
-    
+
     // MARK: - Initialization
     
     override init (style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -28,7 +30,8 @@ class MainScreenCell: UITableViewCell {
         
         setupUI()
         setupConstraints()
-
+        prepareForReuse()
+ 
     }
     
     required init?(coder: NSCoder) {
@@ -37,26 +40,88 @@ class MainScreenCell: UITableViewCell {
     
     // MARK: - Private methods
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        filmPoster.image = nil
+        filmDescription.text = nil
+        filmStartDate.text = nil
+        filmTitle.text = nil
+    }
+    
+    private func setupUI() {
+        self.selectionStyle = .none
+        
+        contentStack.axis = .vertical
+        contentStack.distribution = .fillProportionally
+        contentStack.spacing = 5
+        circleView.backgroundColor = .white
+        circleView.layer.cornerRadius = 32
+        circleView.layer.opacity = 0.7
+        
+        filmPoster.layer.cornerRadius = 10
+        filmPoster.contentMode = .scaleToFill
+        filmPoster.layer.masksToBounds = true
+        filmPoster.layer.borderWidth = 0.2
+        
+        filmTitle.font = UIFont.boldSystemFont(ofSize: 17)
+        
+        filmDescription.numberOfLines = 7
+        filmDescription.minimumScaleFactor = 0.1
+        filmDescription.textColor = .gray
+        filmDescription.font = UIFont.italicSystemFont(ofSize: 15)
+        
+        ratingTitle.textColor = .black
+        ratingTitle.font = UIFont.boldSystemFont(ofSize: 15)
+        
+    }
+    
+    private func setupConstraints() {
+        
+        contentView.addSubview(filmPoster)
+        filmPoster.snp.makeConstraints {
+            $0.left.top.equalToSuperview().inset(10)
+            $0.height.equalTo(190)
+            $0.width.equalTo(140)
+        }
+        
+        filmPoster.addSubview(circleView)
+        circleView.snp.makeConstraints {
+            $0.right.bottom.equalToSuperview().inset(3)
+            $0.height.width.equalTo(64)
+        }
+        
+        circleView.addSubview(ratingTitle)
+        ratingTitle.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        
+        contentView.addSubview(contentStack)
+        contentStack.snp.makeConstraints {
+            $0.left.equalTo(filmPoster.snp.right).offset(10)
+            $0.top.bottom.right.equalToSuperview().inset(10)
+        }
+    }
+    
     private func createSegment(startAngle: CGFloat, endAngle: CGFloat) -> UIBezierPath {
-        return UIBezierPath(arcCenter: CGPoint(x: circleView.frame.midX + 10, y: circleView.frame.midY + 10),
+        return UIBezierPath(arcCenter: CGPoint(x: circleView.frame.midX + 32,
+                                               y: circleView.frame.midY + 32),
                             radius: 25, startAngle: startAngle.toRadians(),
                             endAngle: endAngle.toRadians(), clockwise: true)
     }
     
-    private func createCircle(startAngle: CGFloat, endAngle: CGFloat) {
+    func createCircle(startAngle: CGFloat, endAngle: CGFloat) {
         let segmentPath = createSegment(startAngle: startAngle, endAngle: endAngle)
         let segmentLayer = CAShapeLayer()
 
         segmentLayer.path = segmentPath.cgPath
         segmentLayer.lineWidth = 6
-        segmentLayer.strokeColor = UIColor.green.cgColor
+        segmentLayer.strokeColor = UIColor.red.cgColor
         segmentLayer.fillColor = UIColor.clear.cgColor
+        segmentLayer.opacity = 0.7
         addAnimation(to: segmentLayer)
-//        addGradientLayer(to: segmentLayer)
         circleView.layer.addSublayer(segmentLayer)
 
-        
-    }
+        }
     
     private func addAnimation(to layer: CALayer) {
         let drawAnimation = CABasicAnimation(keyPath: "strokeEnd")
@@ -68,71 +133,14 @@ class MainScreenCell: UITableViewCell {
         drawAnimation.timingFunction = CAMediaTimingFunction(name: .easeOut)
         layer.add(drawAnimation, forKey: "drawCircleAnimation")
     }
-    
-//    private func addGradientLayer(to layer: CALayer) {
-//        let gradientLayer = CAGradientLayer()
-//        gradientLayer.mask = layer
-//        gradientLayer.frame = self.frame
-//        gradientLayer.colors = [UIColor.blue.cgColor, UIColor.yellow.cgColor]
-//
-//        self.layer.addSublayer(gradientLayer)
-//    }
-    
-    private func setupUI() {
-        self.selectionStyle = .none
-        
-        contentStack.axis = .vertical
-        contentStack.distribution = .fillEqually
-        
-        filmPoster.layer.cornerRadius = 5
-        filmPoster.backgroundColor = .black
-        filmPoster.contentMode = .scaleToFill
-        filmPoster.clipsToBounds = true
-        
-        filmTitle.font = UIFont.boldSystemFont(ofSize: 20)
-        
-        filmDescription.numberOfLines = 0
-        filmDescription.lineBreakMode = .byWordWrapping
-        filmDescription.minimumScaleFactor = 0.5
-        
 
-        ratingTitle.textColor = .white
-        ratingTitle.tintColor = .white
-        ratingTitle.text = "8,9"
-        
-    }
-    
-    private func setupConstraints() {
-        
-        contentView.addSubview(filmPoster)
-        filmPoster.snp.makeConstraints {
-            $0.left.top.equalToSuperview().inset(10)
-            $0.height.equalTo(190)
-            $0.width.equalTo(160)
-        }
-        
-        filmPoster.addSubview(circleView)
-        circleView.snp.makeConstraints {
-            $0.right.bottom.equalToSuperview().inset(3)
-            $0.height.width.equalTo(40)
-        }
-        
-        circleView.addSubview(ratingTitle)
-        ratingTitle.snp.makeConstraints {
-            $0.top.left.equalToSuperview()
-        }
-        
-        contentView.addSubview(contentStack)
-        contentStack.snp.makeConstraints {
-            $0.left.equalTo(filmPoster.snp.right).offset(10)
-            $0.top.bottom.right.equalToSuperview().inset(10)
-        }
-    }
-    
     func setupCell(from model: FilmAndTVResult) {
         filmTitle.text = model.name
         filmDescription.text = model.overview
-        filmStartDate.text = model.firstAirDate
+        guard let newDate = mainScreenModel.processDate(string: model.firstAirDate ?? "",
+                                                        fromFormat: "yyyy-MM-dd",
+                                                        toFormat: "dd.MM.yyyy") else {return}
+        filmStartDate.text = "Start date: \(newDate)"
         ratingTitle.text = String(model.voteAverage)
         createCircle(startAngle: 0, endAngle: CGFloat(model.voteAverage))
         DispatchQueue.global().async {
@@ -143,12 +151,5 @@ class MainScreenCell: UITableViewCell {
                 self.filmPoster.image = UIImage(data: imageData)
             }
         }
-    }
-    
-}
-
-extension CGFloat {
-    func toRadians() -> CGFloat {
-        return self * CGFloat(Double.pi) / 5
     }
 }
