@@ -4,10 +4,10 @@ import SnapKit
 class MainViewController: UIViewController {
     
     private lazy var mainView = MainView()
-    private var cinemaDataModel: [FilmAndTVResult] = []
     private var networkManager = NetworkManager()
     private var api = Api()
     private var searchText: String = ""
+    private var cinemaDataModel: [FilmAndTVResult] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +28,10 @@ class MainViewController: UIViewController {
     // MARK: - Private methods
     
     private func setupDelegates() {
+        mainView.searchController.searchBar.delegate = self
+        
         mainView.tableView.dataSource = self
         mainView.tableView.delegate = self
-        mainView.searchController.searchBar.delegate = self
     }
     
     private func refresh() {
@@ -59,16 +60,19 @@ class MainViewController: UIViewController {
     }
     
     private func setupSearchBar() {
+        
         self.navigationItem.titleView = mainView.titleLabel
         self.navigationItem.searchController = mainView.searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
     }
     
     private var filteredCinema: [FilmAndTVResult] {
-            return cinemaDataModel
+        return cinemaDataModel
             .filter({
-                    $0.name.starts(with: searchText) || searchText.isEmpty
-                })
-        }
+                $0.name.starts(with: searchText) || searchText.isEmpty
+            })
+    }
 }
 
 // MARK: - Extensions
@@ -77,14 +81,8 @@ extension MainViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchText = mainView.searchController.searchBar.text ?? ""
-
-            if self.searchText.isEmpty {
-                mainView.setNotFoundView()
-            } else {
-                mainView.setIsFoundView()
-            }
-            mainView.tableView.reloadData()
-        }
+        mainView.tableView.reloadData()
+    }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
@@ -94,7 +92,8 @@ extension MainViewController: UISearchBarDelegate {
         searchBar.showsCancelButton = false
         searchBar.text = nil
         searchBar.endEditing(true)
-        mainView.setIsFoundView()
+        searchText = ""
+        mainView.tableView.reloadData()
     }
 }
 
@@ -113,7 +112,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             
             let data = filteredCinema[indexPath.row]
             cell.setupCell(from: data)
-            print("\(cell)")
             return cell
         }
         return UITableViewCell()
