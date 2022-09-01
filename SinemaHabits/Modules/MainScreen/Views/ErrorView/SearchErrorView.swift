@@ -8,14 +8,9 @@ class SearchErrorView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        addSubview(loupe)
-        addSubview(searchErrorLabel)
-        addSubview(tryToCorrectLabel)
-        
+        self.backgroundColor = .white
         setupUI()
         setupConstraints()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -39,24 +34,21 @@ class SearchErrorView: UIView {
     }
     
     private func setupConstraints() {
-        loupe.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            loupe.centerXAnchor.constraint(equalTo: centerXAnchor),
-            loupe.topAnchor.constraint(equalTo: topAnchor, constant: 42),
-            loupe.widthAnchor.constraint(equalToConstant: 56),
-            loupe.heightAnchor.constraint(equalToConstant: 56)
-        ])
+        addSubview(loupe)
+        loupe.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().inset(300)
+        }
+        addSubview(searchErrorLabel)
+        searchErrorLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(loupe.snp.bottom).offset(8)
+        }
         
-        searchErrorLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            searchErrorLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            searchErrorLabel.topAnchor.constraint(equalTo: loupe.bottomAnchor, constant: 8)
-        ])
-        
-        tryToCorrectLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            tryToCorrectLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            tryToCorrectLabel.topAnchor.constraint(equalTo: searchErrorLabel.bottomAnchor, constant: 12)
-        ])
+        addSubview(tryToCorrectLabel)
+        tryToCorrectLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(searchErrorLabel.snp.bottom).offset(12)
+        }
     }
 }
