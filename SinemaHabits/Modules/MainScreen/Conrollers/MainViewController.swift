@@ -105,6 +105,26 @@ extension MainViewController: UISearchBarDelegate {
         searchText = ""
         mainView.setupTable()
     }
+    
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        let alert = UIAlertController(title: "Сортировка",
+                                      message: "Выберите фильтр для сортировки поиска",
+                                      preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "По фильмам",
+                                      style: .default,
+                                      handler: { _ in
+            print("По фильмам")
+        }))
+        
+        alert.addAction(UIAlertAction(title: "По сериалам",
+                                      style: .default,
+                                      handler: { _ in
+            print("по сериалам")
+        }))
+        
+        present(alert, animated: true)
+    }
 }
 
 // MARK: - UITableViewDataSource
