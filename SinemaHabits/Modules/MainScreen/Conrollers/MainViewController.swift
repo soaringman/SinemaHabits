@@ -8,12 +8,15 @@ class MainViewController: UIViewController {
     private var api = Api()
     private var searchText: String = ""
     private var cinemaDataModel: [FilmAndTVResult] = []
+    private var detailsViewController = DetailsViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainView.errorView.tryAgainButton.addTarget(self, action:
-                                                        #selector(MainViewController().tryAgainButtonClicked(_:)),
-                                                    for: .touchUpInside)
+        mainView.errorView.tryAgainButton.addTarget(
+            self, action:
+                #selector(MainViewController().tryAgainButtonClicked(_:)),
+                for: .touchUpInside)
+        
         self.view = mainView
         getData()
         setupDelegates()
@@ -28,7 +31,6 @@ class MainViewController: UIViewController {
     
     func getData() {
         let baseURL = api.baseURL
-        //       let pageURL = "?page=\(pageNumber)"
         networkManager.fetchData(url: baseURL)
         networkManager.delegate = self
     }
@@ -37,7 +39,6 @@ class MainViewController: UIViewController {
     
     private func setupDelegates() {
         mainView.searchController.searchBar.delegate = self
-        
         mainView.tableView.dataSource = self
         mainView.tableView.delegate = self
     }
@@ -67,13 +68,13 @@ class MainViewController: UIViewController {
         self.navigationItem.titleView = mainView.titleLabel
         self.navigationItem.searchController = mainView.searchController
         navigationItem.hidesSearchBarWhenScrolling = false
-        
     }
     
     private var filteredCinema: [FilmAndTVResult] {
         return cinemaDataModel
             .filter({
-                $0.name?.starts(with: searchText) ?? false || $0.title?.starts(with: searchText) ?? false
+                $0.name?.starts(with: searchText) ?? false ||
+                $0.title?.starts(with: searchText) ?? false
             })
     }
 }
@@ -90,7 +91,6 @@ extension MainViewController: UISearchBarDelegate {
         } else {
             mainView.setupTable()
         }
-        
         mainView.tableView.reloadData()
     }
     
@@ -117,20 +117,25 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let cell = tableView.dequeueReusableCell(withIdentifier: MainScreenCell.reuseID,
-                                                    for: indexPath) as? MainScreenCell {
+        if let cell = tableView.dequeueReusableCell(
+            withIdentifier: MainScreenCell.reuseID,
+            for: indexPath) as? MainScreenCell {
             
-            let data = filteredCinema[indexPath.row]
-            cell.setupCell(from: data)
-            return cell
-        }
+                let data = filteredCinema[indexPath.row]
+                cell.setupCell(from: data)
+                return cell
+            }
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        detailsViewController.setData(model: cinemaDataModel[indexPath.row])
+        navigationController?.pushViewController(detailsViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 210
     }
-    
 }
 
 extension MainViewController: NetworkManagerDelegate {
