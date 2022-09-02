@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1120BE7C28C20EF5009D560F /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1120BE7B28C20EF5009D560F /* NetworkMonitor.swift */; };
+		099BD8C628C241C0006C5058 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099BD8C528C241C0006C5058 /* NetworkMonitor.swift */; };
 		1184A28728BD2F75000D9497 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184A28628BD2F75000D9497 /* AppDelegate.swift */; };
 		1184A28B28BD2F75000D9497 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184A28A28BD2F75000D9497 /* MainViewController.swift */; };
 		1184A29128BD2F75000D9497 /* SinemaHabits.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1184A28F28BD2F75000D9497 /* SinemaHabits.xcdatamodeld */; };
@@ -29,7 +29,7 @@
 
 /* Begin PBXFileReference section */
 		080A753F62D29D4F51FE9FFC /* Pods-SinemaHabits.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SinemaHabits.release.xcconfig"; path = "Target Support Files/Pods-SinemaHabits/Pods-SinemaHabits.release.xcconfig"; sourceTree = "<group>"; };
-		1120BE7B28C20EF5009D560F /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkMonitor.swift; path = ../../../../.Trash/NetworkMonitor.swift; sourceTree = "<group>"; };
+		099BD8C528C241C0006C5058 /* NetworkMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		1184A28328BD2F75000D9497 /* SinemaHabits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SinemaHabits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1184A28628BD2F75000D9497 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1184A28A28BD2F75000D9497 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -67,7 +67,7 @@
 		1120BE7A28C20DBC009D560F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				1120BE7B28C20EF5009D560F /* NetworkMonitor.swift */,
+				099BD8C528C241C0006C5058 /* NetworkMonitor.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -362,7 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1184A28B28BD2F75000D9497 /* MainViewController.swift in Sources */,
-				1120BE7C28C20EF5009D560F /* NetworkMonitor.swift in Sources */,
+				099BD8C628C241C0006C5058 /* NetworkMonitor.swift in Sources */,
 				1184A2B528BD341E000D9497 /* MainView.swift in Sources */,
 				11A8E49F28BE320F0016ED51 /* SearchErrorView.swift in Sources */,
 				9FA30D7728BFA62800F76C62 /* Api.swift in Sources */,
