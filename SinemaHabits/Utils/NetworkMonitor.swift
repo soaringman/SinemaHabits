@@ -24,15 +24,4 @@ func isInternetAvailable() -> Bool {
         let needsConnection = flags.contains(.connectionRequired)
         return (isReachable && !needsConnection)
     }
-
-    func showAlert() {
-        if !isInternetAvailable() {
-            let alert = UIAlertController(title: "Ошибка",
-                                          message: "Проверьте интернет соединение",
-                                          preferredStyle: .alert)
-            let action = UIAlertAction(title: "Закрыть", style: .default, handler: nil)
-            alert.addAction(action)
-            present(alert, animated: true, completion: nil)
-        }
-    }
 }
