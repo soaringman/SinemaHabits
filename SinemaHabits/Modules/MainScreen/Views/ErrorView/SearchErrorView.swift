@@ -37,7 +37,7 @@ class SearchErrorView: UIView {
         addSubview(loupe)
         loupe.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(300)
+            $0.centerY.equalToSuperview()
         }
         addSubview(searchErrorLabel)
         searchErrorLabel.snp.makeConstraints {

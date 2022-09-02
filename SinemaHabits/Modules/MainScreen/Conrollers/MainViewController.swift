@@ -11,11 +11,19 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        mainView.errorView.tryAgainButton.addTarget(self, action:
+                                                        #selector(MainViewController().tryAgainButtonClicked(_:)),
+                                                    for: .touchUpInside)
         self.view = mainView
         getData()
         setupDelegates()
         refresh()
         setupSearchBar()
+    }
+    
+    @objc func tryAgainButtonClicked(_ sender: UIButton) {
+        getData()
+        mainView.setupTable()
     }
     
     func getData() {
@@ -48,12 +56,7 @@ class MainViewController: UIViewController {
             } else {
                 self.mainView.refreshControl.endRefreshing()
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                    let alert = UIAlertController(title: "Ошибка",
-                                                  message: "Проверьте интернет соединение",
-                                                  preferredStyle: .alert)
-                    let action = UIAlertAction(title: "Закрыть", style: .default, handler: nil)
-                    alert.addAction(action)
-                    self.present(alert, animated: true, completion: nil)
+                    self.mainView.setupErrorView()
                 })
             }
         }
@@ -70,7 +73,7 @@ class MainViewController: UIViewController {
     private var filteredCinema: [FilmAndTVResult] {
         return cinemaDataModel
             .filter({
-                $0.name.starts(with: searchText) || searchText.isEmpty
+                $0.name?.starts(with: searchText) ?? false || $0.title?.starts(with: searchText) ?? false
             })
     }
 }
@@ -81,6 +84,13 @@ extension MainViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchText = mainView.searchController.searchBar.text ?? ""
+        
+        if filteredCinema.isEmpty {
+            mainView.setupSearchError()
+        } else {
+            mainView.setupTable()
+        }
+        
         mainView.tableView.reloadData()
     }
     
@@ -93,7 +103,7 @@ extension MainViewController: UISearchBarDelegate {
         searchBar.text = nil
         searchBar.endEditing(true)
         searchText = ""
-        mainView.tableView.reloadData()
+        mainView.setupTable()
     }
 }
 

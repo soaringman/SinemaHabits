@@ -6,7 +6,7 @@ class ErrorView: UIView {
     private lazy var NLOImageView = UIImageView()
     private lazy var titleLabel = UILabel()
     private lazy var subTitleLabel = UILabel()
-    private lazy var tryAgainButton = UIButton()
+    lazy var tryAgainButton = UIButton()
 
     override init(frame: CGRect) {
         super.init(frame: frame)

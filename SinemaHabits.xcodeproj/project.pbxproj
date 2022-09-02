@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1120BE7928C20DA1009D560F /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1120BE7828C20DA1009D560F /* NetworkMonitor.swift */; };
 		1184A28728BD2F75000D9497 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184A28628BD2F75000D9497 /* AppDelegate.swift */; };
 		1184A28B28BD2F75000D9497 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1184A28A28BD2F75000D9497 /* MainViewController.swift */; };
 		1184A29128BD2F75000D9497 /* SinemaHabits.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1184A28F28BD2F75000D9497 /* SinemaHabits.xcdatamodeld */; };
@@ -21,7 +22,6 @@
 		11A8E49F28BE320F0016ED51 /* SearchErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A8E49E28BE320F0016ED51 /* SearchErrorView.swift */; };
 		9ED4EAB6D541E1F3EE19961D /* Pods_SinemaHabits.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 922F077B1BA070CC94C62ABA /* Pods_SinemaHabits.framework */; };
 		9F3BDD2B28BE457100E3F988 /* MainScreenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BDD2A28BE457100E3F988 /* MainScreenCell.swift */; };
-		9F3BDD2E28BE4F0400E3F988 /* NetworkAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BDD2D28BE4F0400E3F988 /* NetworkAlert.swift */; };
 		9F3BDD3028BE87FA00E3F988 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3BDD2F28BE87FA00E3F988 /* NetworkManager.swift */; };
 		9FA30D7528BF78EC00F76C62 /* CinemaDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA30D7428BF78EC00F76C62 /* CinemaDataModel.swift */; };
 		9FA30D7728BFA62800F76C62 /* Api.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FA30D7628BFA62800F76C62 /* Api.swift */; };
@@ -29,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		080A753F62D29D4F51FE9FFC /* Pods-SinemaHabits.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SinemaHabits.release.xcconfig"; path = "Target Support Files/Pods-SinemaHabits/Pods-SinemaHabits.release.xcconfig"; sourceTree = "<group>"; };
+		1120BE7828C20DA1009D560F /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NetworkMonitor.swift; path = SinemaHabits/Network/Utils/NetworkMonitor.swift; sourceTree = SOURCE_ROOT; };
 		1184A28328BD2F75000D9497 /* SinemaHabits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SinemaHabits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1184A28628BD2F75000D9497 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1184A28A28BD2F75000D9497 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -45,7 +46,6 @@
 		11A8E49E28BE320F0016ED51 /* SearchErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchErrorView.swift; sourceTree = "<group>"; };
 		922F077B1BA070CC94C62ABA /* Pods_SinemaHabits.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SinemaHabits.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F3BDD2A28BE457100E3F988 /* MainScreenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenCell.swift; sourceTree = "<group>"; };
-		9F3BDD2D28BE4F0400E3F988 /* NetworkAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAlert.swift; sourceTree = "<group>"; };
 		9F3BDD2F28BE87FA00E3F988 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		9FA30D7428BF78EC00F76C62 /* CinemaDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CinemaDataModel.swift; sourceTree = "<group>"; };
 		9FA30D7628BFA62800F76C62 /* Api.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Api.swift; sourceTree = "<group>"; };
@@ -64,6 +64,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1120BE7A28C20DBC009D560F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1120BE7828C20DA1009D560F /* NetworkMonitor.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		1184A27A28BD2F75000D9497 = {
 			isa = PBXGroup;
 			children = (
@@ -88,7 +96,7 @@
 				1184A28628BD2F75000D9497 /* AppDelegate.swift */,
 				1184A29E28BD313C000D9497 /* Modules */,
 				1184A29D28BD3088000D9497 /* Network */,
-				9F3BDD2C28BE4ED600E3F988 /* Utils */,
+				1120BE7A28C20DBC009D560F /* Utils */,
 				1184A2A928BD32F1000D9497 /* Resources */,
 				1184A28F28BD2F75000D9497 /* SinemaHabits.xcdatamodeld */,
 			);
@@ -218,14 +226,6 @@
 				922F077B1BA070CC94C62ABA /* Pods_SinemaHabits.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		9F3BDD2C28BE4ED600E3F988 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				9F3BDD2D28BE4F0400E3F988 /* NetworkAlert.swift */,
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,11 +362,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				1184A28B28BD2F75000D9497 /* MainViewController.swift in Sources */,
+				1120BE7928C20DA1009D560F /* NetworkMonitor.swift in Sources */,
 				1184A2B528BD341E000D9497 /* MainView.swift in Sources */,
 				11A8E49F28BE320F0016ED51 /* SearchErrorView.swift in Sources */,
 				9FA30D7728BFA62800F76C62 /* Api.swift in Sources */,
 				1184A29128BD2F75000D9497 /* SinemaHabits.xcdatamodeld in Sources */,
-				9F3BDD2E28BE4F0400E3F988 /* NetworkAlert.swift in Sources */,
 				11A8E49D28BE20CA0016ED51 /* ErrorView.swift in Sources */,
 				9F3BDD2B28BE457100E3F988 /* MainScreenCell.swift in Sources */,
 				1184A2B128BD33E8000D9497 /* DetailsModels.swift in Sources */,

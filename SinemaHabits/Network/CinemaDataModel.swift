@@ -23,7 +23,7 @@ struct FilmAndTVResult: Codable {
     let voteAverage: Double
     // for TV (serials)
     let firstAirDate: String?
-    let name: String // optional
+    let name: String? // optional
     
     enum CodingKeys: String, CodingKey {
         
