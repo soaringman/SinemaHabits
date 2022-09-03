@@ -8,7 +8,6 @@ class SearchErrorView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
         setupUI()
         setupConstraints()
     }
@@ -18,17 +17,19 @@ class SearchErrorView: UIView {
     }
     
     private func setupUI() {
+        backgroundColor = UIColor(named: "customWhite")
+        
         loupe.image = UIImage(named: "loupe")
         
         searchErrorLabel.text = "Мы никого не нашли"
         searchErrorLabel.font = UIFont(name: "Inter-SemiBold", size: 17)
-        searchErrorLabel.textColor = UIColor(red: 0.02, green: 0.02, blue: 0.063, alpha: 1)
+        searchErrorLabel.textColor = UIColor(named: "customBlack")
         searchErrorLabel.contentMode = .scaleAspectFit
         searchErrorLabel.textAlignment = .center
         
         tryToCorrectLabel.text = "Попробуйте скорректировать запрос"
         tryToCorrectLabel.font = UIFont(name: "Inter-Regular", size: 16)
-        tryToCorrectLabel.textColor = UIColor(red: 0.591, green: 0.591, blue: 0.609, alpha: 1)
+        tryToCorrectLabel.textColor = UIColor(named: "customBlack")
         tryToCorrectLabel.contentMode = .scaleAspectFit
         tryToCorrectLabel.textAlignment = .center
     }

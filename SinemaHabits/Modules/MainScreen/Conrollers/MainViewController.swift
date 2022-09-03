@@ -3,44 +3,57 @@ import SnapKit
 
 class MainViewController: UIViewController {
     
+    // MARK: - Private properties
+    
+    private lazy var searchText: String = ""
     private lazy var mainView = MainView()
     private var networkManager = NetworkManager()
     private var api = Api()
-    private var searchText: String = ""
     private var cinemaDataModel: [FilmAndTVResult] = []
     private var detailsViewController = DetailsViewController()
     
+    // MARK: - Life cicle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainView.errorView.tryAgainButton.addTarget(
-            self, action:
-                #selector(MainViewController().tryAgainButtonClicked(_:)),
-                for: .touchUpInside)
-        
-        self.view = mainView
-        getData()
+        setupUI()
         setupDelegates()
-        refresh()
         setupSearchBar()
-    }
-    
-    @objc func tryAgainButtonClicked(_ sender: UIButton) {
         getData()
-        mainView.setupTable()
-    }
-    
-    func getData() {
-        let baseURL = api.baseURL
-        networkManager.fetchData(url: baseURL)
-        networkManager.delegate = self
+        refresh()
+        
+        // TO DO - refactor
+        mainView.errorView.tryAgainButton.addTarget(self, action:
+                                                        #selector(MainViewController().tryAgainButtonClicked(_:)),
+                                                    for: .touchUpInside)
     }
     
     // MARK: - Private methods
+    private func setupUI() {
+        
+        self.view = mainView
+    }
     
     private func setupDelegates() {
         mainView.searchController.searchBar.delegate = self
         mainView.tableView.dataSource = self
         mainView.tableView.delegate = self
+    }
+    
+    private func setupSearchBar() {
+        
+        self.navigationItem.titleView = mainView.titleLabel
+        self.navigationItem.searchController = mainView.searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
+    }
+ 
+    private func getData() {
+        
+        let baseURL = api.baseURL
+        //       let pageURL = "?page=\(pageNumber)"
+        networkManager.fetchData(url: baseURL)
+        networkManager.delegate = self
     }
     
     private func refresh() {
@@ -69,6 +82,8 @@ class MainViewController: UIViewController {
         self.navigationItem.searchController = mainView.searchController
         navigationItem.hidesSearchBarWhenScrolling = false
     }
+
+    // MARK: - Computed properties
     
     private var filteredCinema: [FilmAndTVResult] {
         return cinemaDataModel
@@ -77,9 +92,16 @@ class MainViewController: UIViewController {
                 $0.title?.starts(with: searchText) ?? false
             })
     }
+    
+    // MARK: - Actions
+    
+    @objc private func tryAgainButtonClicked(_ sender: UIButton) {
+        getData()
+        mainView.setupTable()
+    }
 }
 
-// MARK: - Extensions
+    // MARK: - Extensions
 
 extension MainViewController: UISearchBarDelegate {
     
@@ -105,9 +127,29 @@ extension MainViewController: UISearchBarDelegate {
         searchText = ""
         mainView.setupTable()
     }
+    
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        let alert = UIAlertController(title: "Сортировка",
+                                      message: "Выберите фильтр для сортировки поиска",
+                                      preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "По фильмам",
+                                      style: .default,
+                                      handler: { _ in
+            print("По фильмам")
+        }))
+        
+        alert.addAction(UIAlertAction(title: "По сериалам",
+                                      style: .default,
+                                      handler: { _ in
+            print("по сериалам")
+        }))
+        
+        present(alert, animated: true)
+    }
 }
 
-// MARK: - UITableViewDataSource
+    // MARK: - UITableViewDataSource
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
@@ -137,6 +179,8 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         return 210
     }
 }
+
+    // MARK: - NetworkManagerDelegate
 
 extension MainViewController: NetworkManagerDelegate {
     func showData(results: [FilmAndTVResult]) {
