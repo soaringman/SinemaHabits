@@ -44,6 +44,7 @@ final class MainView: UIView {
         searchController.searchBar.placeholder = "Search cinema..."
         searchController.searchBar.tintColor = .black
         searchController.searchBar.showsBookmarkButton = true
+        searchController.searchBar.setImage(UIImage(named: "filter-list"), for: .bookmark, state: .normal)
         
         // ToDo переделать это говно
         titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
