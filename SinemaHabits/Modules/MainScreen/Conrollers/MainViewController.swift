@@ -9,7 +9,10 @@ class MainViewController: UIViewController {
     private lazy var mainView = MainView()
     private var networkManager = NetworkManager()
     private var api = Api()
-    private var cinemaDataModel: [FilmAndTVResult] = []
+//    private var cinemaDataModel: [Any] = []
+    private var moviesDataModel: MovieData?
+    private var tvDataModel: TVData?
+    private var genres: CinemaGenres = .tv
     
     // MARK: - Life cicle
     
@@ -19,7 +22,7 @@ class MainViewController: UIViewController {
         setupUI()
         setupDelegates()
         setupSearchBar()
-        getData()
+        getData(genres)
         refresh()
         
         // TO DO - refactor
@@ -50,12 +53,11 @@ class MainViewController: UIViewController {
         
     }
  
-    private func getData() {
+    private func getData(_ genres: CinemaGenres) {
         
-        let baseURL = api.baseURL
         //       let pageURL = "?page=\(pageNumber)"
-        networkManager.fetchData(url: baseURL)
         networkManager.delegate = self
+        networkManager.fetchData(genres: genres)
     }
     
     private func refresh() {
@@ -65,7 +67,7 @@ class MainViewController: UIViewController {
             guard let self = self else { return }
             
             if self.isInternetAvailable() {
-                self.getData()
+                self.getData(self.genres)
                 DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                     self.mainView.refreshControl.endRefreshing()
                 })
@@ -79,17 +81,17 @@ class MainViewController: UIViewController {
     }
     // MARK: - Computed properties
     
-    private var filteredCinema: [FilmAndTVResult] {
-        return cinemaDataModel
-            .filter({
-                $0.name?.starts(with: searchText) ?? false || $0.title?.starts(with: searchText) ?? false
-            })
-    }
+//    private var filteredCinema: [FilmAndTVResult] {
+//        return cinemaDataModel
+//            .filter({
+//                $0.name?.starts(with: searchText) ?? false || $0.title?.starts(with: searchText) ?? false
+//            })
+//    }
     
     // MARK: - Actions
     
     @objc private func tryAgainButtonClicked(_ sender: UIButton) {
-        getData()
+        getData(genres)
         mainView.setupTable()
     }
 }
@@ -101,11 +103,11 @@ extension MainViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.searchText = mainView.searchController.searchBar.text ?? ""
         
-        if filteredCinema.isEmpty {
-            mainView.setupSearchError()
-        } else {
-            mainView.setupTable()
-        }
+//        if filteredCinema.isEmpty {
+//            mainView.setupSearchError()
+//        } else {
+//            mainView.setupTable()
+//        }
         
         mainView.tableView.reloadData()
     }
@@ -131,14 +133,17 @@ extension MainViewController: UISearchBarDelegate {
                                       style: .default,
                                       handler: { _ in
             print("По фильмам")
+            self.genres = .movie
+            self.refresh()
         }))
         
         alert.addAction(UIAlertAction(title: "По сериалам",
                                       style: .default,
                                       handler: { _ in
             print("по сериалам")
+            self.genres = .tv
+            self.refresh()
         }))
-        
         present(alert, animated: true)
     }
 }
@@ -148,16 +153,26 @@ extension MainViewController: UISearchBarDelegate {
 extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredCinema.count
+        if let movies = moviesDataModel {
+            return movies.results.count
+        } else if let tv = tvDataModel {
+            return tv.results.count
+        } else {
+            return 0
+        }
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: MainScreenCell.reuseID,
                                                     for: indexPath) as? MainScreenCell {
-            
-            let data = filteredCinema[indexPath.row]
-            cell.setupCell(from: data)
+            if let movies = moviesDataModel {
+                let data = movies.results[indexPath.row]
+                cell.setupCell(from: data)
+            } else if let tv = tvDataModel {
+                let data = tv.results[indexPath.row]
+                cell.setupCell(from: data)
+            }
             return cell
         }
         return UITableViewCell()
@@ -172,8 +187,15 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     // MARK: - NetworkManagerDelegate
 
 extension MainViewController: NetworkManagerDelegate {
-    func showData(results: [FilmAndTVResult]) {
-        cinemaDataModel = results
+    func showTV(results: TVData) {
+        tvDataModel = results
+        moviesDataModel = nil
+        mainView.tableView.reloadData()
+    }
+    
+    func showMovies(results: MovieData) {
+        moviesDataModel = results
+        tvDataModel = nil
         mainView.tableView.reloadData()
     }
     

@@ -134,7 +134,22 @@ final class MainScreenCell: UITableViewCell {
         layer.add(drawAnimation, forKey: "drawCircleAnimation")
     }
 
-    func setupCell(from model: FilmAndTVResult) {
+    func setupCell(from model: MovieDataResult) {
+        filmTitle.text = model.title
+        filmDescription.text = model.overview
+        ratingTitle.text = String(model.voteAverage)
+        createCircle(startAngle: 0, endAngle: CGFloat(model.voteAverage))
+        DispatchQueue.global().async {
+            let url = "https://image.tmdb.org/t/p/w185\(model.posterPath)"
+            guard let imageUrl = URL(string: url) else { return }
+            guard let imageData = try? Data(contentsOf: imageUrl) else { return }
+            DispatchQueue.main.async {
+                self.filmPoster.image = UIImage(data: imageData)
+            }
+        }
+    }
+    
+    func setupCell(from model: TVDataResult) {
         filmTitle.text = model.name
         filmDescription.text = model.overview
         guard let newDate = mainScreenModel.processDate(string: model.firstAirDate ?? "",
