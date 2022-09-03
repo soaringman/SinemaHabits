@@ -20,6 +20,8 @@ class ErrorView: UIView {
     }
     
     private func setupUI() {
+        backgroundColor = UIColor(named: "customWhite")
+        
         NLOImageView.image = UIImage(named: "NLO")
         NLOImageView.clipsToBounds = true
         NLOImageView.layer.borderWidth = 0
@@ -27,12 +29,12 @@ class ErrorView: UIView {
         titleLabel.text = "Какой-то сверхразум всё сломал"
         titleLabel.numberOfLines = 0
         titleLabel.font = UIFont.boldSystemFont(ofSize: 17)
-        titleLabel.textColor = UIColor(red: 0.05, green: 0.05, blue: 0.16, alpha: 1)
+        titleLabel.textColor = UIColor(named: "customBlack")
         
         subTitleLabel.text = "Постараемся быстро починить"
         subTitleLabel.numberOfLines = 0
         subTitleLabel.font = UIFont.systemFont(ofSize: 16)
-        subTitleLabel.textColor = UIColor(red: 151/255, green: 151/255, blue: 155/255, alpha: 1)
+        subTitleLabel.textColor = UIColor(named: "customBlack")
         
         tryAgainButton.backgroundColor = .clear
         tryAgainButton.setTitle("Попробовать снова", for: .normal)
