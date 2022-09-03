@@ -5,12 +5,13 @@ final class DetailsView: UIView {
     
     // MARK: - UI Elements
     
+    private lazy var viewForPosterImage = UIView()
     private lazy var posterImage = UIImageView()
     private lazy var ratingLabel = UILabel()
-    private lazy var releaseFilmDateLabel = UILabel()
+    private var releaseFilmDateLabel = UILabel()
     private lazy var descriptionFilmLabel = UILabel()
     private lazy var stackForReleaseAndRating = UIStackView(arrangedSubviews: [ratingLabel, releaseFilmDateLabel])
-//    private lazy var stackForAllElements = UIStackView(arrangedSubviews: [posterImage,stackForReleaseAndRating, descriptionFilmLabel])
+    private lazy var stackForAllElements = UIStackView(arrangedSubviews: [stackForReleaseAndRating, descriptionFilmLabel])
     
     var image = ""
     var rating = ""
@@ -33,56 +34,53 @@ final class DetailsView: UIView {
     // MARK: - Private methods
     
     func setupUI() {
+        
         backgroundColor = UIColor(named: "backGroudColor")
         stackForReleaseAndRating.axis = .horizontal
-        stackForReleaseAndRating.distribution = .equalSpacing
-    
-        
-//        stackForAllElements.axis = .vertical
-//        stackForAllElements.distribution = .fill
-//        stackForAllElements.spacing = CGFloat.top
-        
-        
-        ratingLabel.text = rating
-        releaseFilmDateLabel.text = releaseFilmDate
-        descriptionFilmLabel.text = descriptionFilm
+        stackForReleaseAndRating.distribution = .fillEqually
+   
+        stackForAllElements.axis = .vertical
+        stackForAllElements.distribution = .fill
+        stackForAllElements.spacing = 16
+
+        releaseFilmDateLabel.textAlignment = .right
+
         descriptionFilmLabel.numberOfLines = 0
-        descriptionFilmLabel.backgroundColor = .lightGray
+        descriptionFilmLabel.lineBreakMode = .byWordWrapping
+
+        posterImage.contentMode = .scaleAspectFit
+        
+        viewForPosterImage.backgroundColor = .black
+
+        ratingLabel.text = rating
+        descriptionFilmLabel.text = descriptionFilm
+
         if let imageUrl = URL(string: "https://image.tmdb.org/t/p/w500\(image)"),
            let imageData = try? Data(contentsOf: imageUrl) {
             posterImage.image = UIImage(data: imageData)
         }
-        posterImage.contentMode = .scaleAspectFill
-        posterImage.clipsToBounds = true
+        
+        releaseFilmDateLabel.text = releaseFilmDate
     }
     
     private func setupConstraints() {
-        
-        addSubview(posterImage)
-        posterImage.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(450)
-        }
-        
-        addSubview(stackForReleaseAndRating)
-        stackForReleaseAndRating.snp.makeConstraints {
-            $0.top.equalTo(posterImage.snp.bottom).offset(CGFloat.top)
-            $0.leading.trailing.equalTo(stackForReleaseAndRating).inset(10)
 
+        addSubview(viewForPosterImage)
+        viewForPosterImage.snp.makeConstraints {
+            $0.top.equalTo(safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(500)
         }
         
-//        addSubview(stackForAllElements)
-//        stackForAllElements.snp.makeConstraints {
-//            $0.top.equalToSuperview()
-//            $0.bottom.equalToSuperview()
-//            $0.leading.trailing.equalToSuperview()
-//        }
-        
-        addSubview(descriptionFilmLabel)
-        descriptionFilmLabel.snp.makeConstraints {
-            $0.top.equalTo(stackForReleaseAndRating).inset(CGFloat.top)
-            $0.leading.trailing.equalToSuperview().inset(5)
+        viewForPosterImage.addSubview(posterImage)
+        posterImage.snp.makeConstraints {
+            $0.top.centerX.height.equalToSuperview()
+        }
+
+        addSubview(stackForAllElements)
+        stackForAllElements.snp.makeConstraints {
+            $0.top.equalTo(posterImage.snp.bottom).offset(16)
+            $0.leading.trailing.equalToSuperview().inset(16)
         }
     }
 }
@@ -91,3 +89,4 @@ private extension CGFloat {
     static let leadingTrailing: CGFloat = 20
     static let top: CGFloat = 20
 }
+
