@@ -48,7 +48,7 @@ final class MainView: UIView {
         // ToDo переделать это говно
         titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
         titleLabel.textAlignment = .left
-        titleLabel.text = "Home"
+        titleLabel.text = "SinemaHabits"
         
         errorView.isHidden = true
         searchErrorView.isHidden = true
