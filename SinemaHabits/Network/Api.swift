@@ -2,6 +2,11 @@ import Foundation
 
 final class Api {
     
+    enum Urls: String {
+        case serialURL = "https://api.themoviedb.org/3/discover/tv?api_key=22f042b4faf775acd05fb5d467cfbffd&page=2"
+        case cinemaURL = "https://api.themoviedb.org/3/discover/movie?api_key=22f042b4faf775acd05fb5d467cfbffd&page=1"
+    }
+    
     let baseURL = "https://api.themoviedb.org/3/discover/tv?api_key=22f042b4faf775acd05fb5d467cfbffd&page=2"
     
     func decodeData(url: String, completion: @escaping (Result<FilmAndTVModel, Error>) -> Void) {

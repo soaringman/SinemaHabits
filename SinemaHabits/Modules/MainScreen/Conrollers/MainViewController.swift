@@ -11,15 +11,17 @@ class MainViewController: UIViewController {
     private var api = Api()
     private var cinemaDataModel: [FilmAndTVResult] = []
     
+    var url = Api().baseURL
+    
     // MARK: - Life cicle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getData()
         setupUI()
         setupDelegates()
         setupSearchBar()
-        getData()
         refresh()
         
         // TO DO - refactor
@@ -52,9 +54,9 @@ class MainViewController: UIViewController {
  
     private func getData() {
         
-        let baseURL = api.baseURL
-        //       let pageURL = "?page=\(pageNumber)"
-        networkManager.fetchData(url: baseURL)
+ //       let baseURL = api.baseURL
+        // let pageURL = "?page=\(pageNumber)"
+        networkManager.fetchData(url: url)
         networkManager.delegate = self
     }
     
@@ -129,13 +131,19 @@ extension MainViewController: UISearchBarDelegate {
         
         alert.addAction(UIAlertAction(title: "По фильмам",
                                       style: .default,
-                                      handler: { _ in
+                                      handler: { [weak self] _ in
+            guard let self = self else {return}
+            self.url = Api.Urls.cinemaURL.rawValue
+            self.getData()
             print("По фильмам")
         }))
         
         alert.addAction(UIAlertAction(title: "По сериалам",
                                       style: .default,
-                                      handler: { _ in
+                                      handler: {[weak self] _ in
+            guard let self = self else {return}
+            self.url = Api.Urls.serialURL.rawValue
+            self.getData()
             print("по сериалам")
         }))
         
@@ -156,9 +164,15 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         if let cell = tableView.dequeueReusableCell(withIdentifier: MainScreenCell.reuseID,
                                                     for: indexPath) as? MainScreenCell {
             
+            if url == Api.Urls.cinemaURL.rawValue {
             let data = filteredCinema[indexPath.row]
             cell.setupCell(from: data)
             return cell
+            } else if url == Api.Urls.serialURL.rawValue {
+                let data = filteredCinema[indexPath.row]
+                cell.setupCell(from: data)
+                return cell
+            }
         }
         return UITableViewCell()
     }

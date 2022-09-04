@@ -135,7 +135,9 @@ final class MainScreenCell: UITableViewCell {
     }
 
     func setupCell(from model: FilmAndTVResult) {
-        filmTitle.text = model.name
+        
+        MainViewController().url == Api.Urls.serialURL.rawValue ? (filmTitle.text = model.name) : (filmTitle.text = model.title)
+
         filmDescription.text = model.overview
         guard let newDate = mainScreenModel.processDate(string: model.firstAirDate ?? "",
                                                         fromFormat: "yyyy-MM-dd",
