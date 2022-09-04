@@ -29,15 +29,6 @@ class DetailsViewController: UIViewController {
         detailsView.descriptionFilm = model.overview
     }
     
-//    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
-//        print("У нас ничего не работает!!!!")
-//        navigationItem.title = ""
-//        detailsView.image = ""
-//        detailsView.rating = ""
-//        detailsView.releaseFilmDate = ""
-//        detailsView.descriptionFilm = ""
-//    }
-    
     private func processDate(
         string: String,
         fromFormat: String = "ddMMyyyy",
