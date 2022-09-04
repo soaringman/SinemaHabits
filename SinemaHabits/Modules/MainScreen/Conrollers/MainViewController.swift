@@ -75,13 +75,6 @@ class MainViewController: UIViewController {
             }
         }
     }
-    
-    private func setupSearchBar() {
-        
-        self.navigationItem.titleView = mainView.titleLabel
-        self.navigationItem.searchController = mainView.searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-    }
 
     // MARK: - Computed properties
     
