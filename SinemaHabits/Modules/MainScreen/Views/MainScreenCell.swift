@@ -4,7 +4,7 @@ import CloudKit
 
 final class MainScreenCell: UITableViewCell {
     
-    // ReuseID
+    // MARK: - ReuseID
     static let reuseID = "Cell"
     private let mainScreenModel = MainScreenModel()
     

@@ -5,13 +5,15 @@ final class DetailsView: UIView {
     
     // MARK: - UI Elements
     
+    private lazy var scrollView = UIScrollView()
     private lazy var viewForPosterImage = UIView()
     private lazy var posterImage = UIImageView()
     private lazy var ratingLabel = UILabel()
     private var releaseFilmDateLabel = UILabel()
     private lazy var descriptionFilmLabel = UILabel()
     private lazy var stackForReleaseAndRating = UIStackView(arrangedSubviews: [ratingLabel, releaseFilmDateLabel])
-    private lazy var stackForAllElements = UIStackView(arrangedSubviews: [stackForReleaseAndRating, descriptionFilmLabel])
+    private lazy var stackForAllElements = UIStackView(
+        arrangedSubviews: [stackForReleaseAndRating, descriptionFilmLabel])
     
     var image = ""
     var rating = ""
@@ -29,7 +31,6 @@ final class DetailsView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     // MARK: - Private methods
     
@@ -65,6 +66,12 @@ final class DetailsView: UIView {
     
     private func setupConstraints() {
 
+        addSubview(scrollView)
+        scrollView.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.centerX.equalToSuperview()
+        }
+        
         addSubview(viewForPosterImage)
         viewForPosterImage.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide)
@@ -89,4 +96,3 @@ private extension CGFloat {
     static let leadingTrailing: CGFloat = 20
     static let top: CGFloat = 20
 }
-

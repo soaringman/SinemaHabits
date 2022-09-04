@@ -1,10 +1,3 @@
-//
-//  CinemaDataModel.swift
-//  SinemaHabits
-//
-//  Created by Алексей Гуляев on 31.08.2022.
-//
-
 import Foundation
 
 struct FilmAndTVModel: Codable {
@@ -13,17 +6,15 @@ struct FilmAndTVModel: Codable {
 }
 
 // MARK: - Result
+
 struct FilmAndTVResult: Codable {
     let id: Int
     let overview: String
     let popularity: Double
     let posterPath: String
-    let releaseDate: String?
-    let title: String?
     let voteAverage: Double
-    // for TV (serials)
     let firstAirDate: String?
-    let name: String? // optional
+    let name: String?
     
     enum CodingKeys: String, CodingKey {
         
@@ -31,10 +22,7 @@ struct FilmAndTVResult: Codable {
         case overview
         case popularity
         case posterPath = "poster_path"
-        case releaseDate = "release_date"
-        case title
         case voteAverage = "vote_average"
-        // for TV (serials)
         case firstAirDate = "first_air_date"
         case name
     }

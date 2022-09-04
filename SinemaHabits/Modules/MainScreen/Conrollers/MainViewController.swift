@@ -22,13 +22,13 @@ class MainViewController: UIViewController {
         getData()
         refresh()
         
-        // TO DO - refactor
         mainView.errorView.tryAgainButton.addTarget(self, action:
                                                         #selector(MainViewController().tryAgainButtonClicked(_:)),
                                                     for: .touchUpInside)
     }
     
     // MARK: - Private methods
+    
     private func setupUI() {
         
         self.view = mainView
@@ -81,8 +81,7 @@ class MainViewController: UIViewController {
     private var filteredCinema: [FilmAndTVResult] {
         return cinemaDataModel
             .filter({
-                $0.name?.starts(with: searchText) ?? false ||
-                $0.title?.starts(with: searchText) ?? false
+                $0.name?.starts(with: searchText) ?? false
             })
     }
     
@@ -119,26 +118,6 @@ extension MainViewController: UISearchBarDelegate {
         searchBar.endEditing(true)
         searchText = ""
         mainView.setupTable()
-    }
-    
-    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
-        let alert = UIAlertController(title: "Сортировка",
-                                      message: "Выберите фильтр для сортировки поиска",
-                                      preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "По фильмам",
-                                      style: .default,
-                                      handler: { _ in
-            print("По фильмам")
-        }))
-        
-        alert.addAction(UIAlertAction(title: "По сериалам",
-                                      style: .default,
-                                      handler: { _ in
-            print("по сериалам")
-        }))
-        
-        present(alert, animated: true)
     }
 }
 

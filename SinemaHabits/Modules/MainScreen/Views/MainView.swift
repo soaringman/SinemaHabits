@@ -4,7 +4,8 @@ final class MainView: UIView {
     
     var refresh: (() -> Void)?
     
-    // UI Elements
+    // MARK: - UI Elements
+    
     let errorView = ErrorView(frame: UIScreen.main.bounds)
     private let searchErrorView = SearchErrorView(frame: UIScreen.main.bounds)
     public lazy var tableView: UITableView = UITableView(frame: self.bounds, style: .plain)
@@ -43,10 +44,7 @@ final class MainView: UIView {
         searchController.searchBar.searchTextField.clearButtonMode = .never
         searchController.searchBar.placeholder = "Search cinema..."
         searchController.searchBar.tintColor = UIColor(named: "customBlack")
-        searchController.searchBar.showsBookmarkButton = true
-        searchController.searchBar.setImage(UIImage(named: "filter-list"), for: .bookmark, state: .normal)
         
-        // ToDo переделать это говно
         titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
         titleLabel.textAlignment = .left
         titleLabel.text = "SinemaHabits"
