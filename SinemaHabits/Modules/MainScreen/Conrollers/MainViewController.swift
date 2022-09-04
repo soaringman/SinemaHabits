@@ -10,12 +10,12 @@ class MainViewController: UIViewController {
     private var networkManager = NetworkManager()
     private var api = Api()
     private var cinemaDataModel: [FilmAndTVResult] = []
+    private var detailsViewController = DetailsViewController()
     
     // MARK: - Life cicle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupUI()
         setupDelegates()
         setupSearchBar()
@@ -29,14 +29,12 @@ class MainViewController: UIViewController {
     }
     
     // MARK: - Private methods
-    
     private func setupUI() {
         
         self.view = mainView
     }
     
     private func setupDelegates() {
-        
         mainView.searchController.searchBar.delegate = self
         mainView.tableView.dataSource = self
         mainView.tableView.delegate = self
@@ -77,12 +75,21 @@ class MainViewController: UIViewController {
             }
         }
     }
+    
+    private func setupSearchBar() {
+        
+        self.navigationItem.titleView = mainView.titleLabel
+        self.navigationItem.searchController = mainView.searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+    }
+
     // MARK: - Computed properties
     
     private var filteredCinema: [FilmAndTVResult] {
         return cinemaDataModel
             .filter({
-                $0.name?.starts(with: searchText) ?? false || $0.title?.starts(with: searchText) ?? false
+                $0.name?.starts(with: searchText) ?? false ||
+                $0.title?.starts(with: searchText) ?? false
             })
     }
     
@@ -106,7 +113,6 @@ extension MainViewController: UISearchBarDelegate {
         } else {
             mainView.setupTable()
         }
-        
         mainView.tableView.reloadData()
     }
     
@@ -153,20 +159,25 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let cell = tableView.dequeueReusableCell(withIdentifier: MainScreenCell.reuseID,
-                                                    for: indexPath) as? MainScreenCell {
+        if let cell = tableView.dequeueReusableCell(
+            withIdentifier: MainScreenCell.reuseID,
+            for: indexPath) as? MainScreenCell {
             
-            let data = filteredCinema[indexPath.row]
-            cell.setupCell(from: data)
-            return cell
-        }
+                let data = filteredCinema[indexPath.row]
+                cell.setupCell(from: data)
+                return cell
+            }
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        detailsViewController.setData(model: cinemaDataModel[indexPath.row])
+        navigationController?.pushViewController(detailsViewController, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 210
     }
-    
 }
 
     // MARK: - NetworkManagerDelegate
