@@ -3,6 +3,13 @@ import SnapKit
 
 final class DetailsView: UIView {
     
+    // MARK: - Properties
+    
+    var image = ""
+    var rating = ""
+    var releaseFilmDate = ""
+    var descriptionFilm = ""
+    
     // MARK: - UI Elements
     
     private lazy var scrollView = UIScrollView()
@@ -14,11 +21,6 @@ final class DetailsView: UIView {
     private lazy var stackForReleaseAndRating = UIStackView(arrangedSubviews: [ratingLabel, releaseFilmDateLabel])
     private lazy var stackForAllElements = UIStackView(
         arrangedSubviews: [stackForReleaseAndRating, descriptionFilmLabel])
-    
-    var image = ""
-    var rating = ""
-    var releaseFilmDate = ""
-    var descriptionFilm = ""
     
     // MARK: - Initialization
     
@@ -32,30 +34,30 @@ final class DetailsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    // MARK: - Private methods
+    // MARK: - Public Methods
     
     func setupUI() {
         
         backgroundColor = UIColor(named: "backGroudColor")
         stackForReleaseAndRating.axis = .horizontal
         stackForReleaseAndRating.distribution = .fillEqually
-   
+        
         stackForAllElements.axis = .vertical
         stackForAllElements.distribution = .fill
         stackForAllElements.spacing = 16
-
+        
         releaseFilmDateLabel.textAlignment = .right
-
+        
         descriptionFilmLabel.numberOfLines = 0
         descriptionFilmLabel.lineBreakMode = .byWordWrapping
-
+        
         posterImage.contentMode = .scaleAspectFit
         
         viewForPosterImage.backgroundColor = .black
-
+        
         ratingLabel.text = rating
         descriptionFilmLabel.text = descriptionFilm
-
+        
         if let imageUrl = URL(string: "https://image.tmdb.org/t/p/w500\(image)"),
            let imageData = try? Data(contentsOf: imageUrl) {
             posterImage.image = UIImage(data: imageData)
@@ -63,9 +65,14 @@ final class DetailsView: UIView {
         
         releaseFilmDateLabel.text = releaseFilmDate
     }
-    
-    private func setupConstraints() {
+}
 
+// MARK: - Private methods
+
+private extension DetailsView {
+    
+    func setupConstraints() {
+        
         addSubview(scrollView)
         scrollView.snp.makeConstraints {
             $0.centerY.equalToSuperview()
@@ -83,7 +90,7 @@ final class DetailsView: UIView {
         posterImage.snp.makeConstraints {
             $0.top.centerX.height.equalToSuperview()
         }
-
+        
         addSubview(stackForAllElements)
         stackForAllElements.snp.makeConstraints {
             $0.top.equalTo(posterImage.snp.bottom).offset(16)
@@ -91,6 +98,8 @@ final class DetailsView: UIView {
         }
     }
 }
+
+// MARK: - CGFload
 
 private extension CGFloat {
     static let leadingTrailing: CGFloat = 20

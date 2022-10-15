@@ -1,13 +1,18 @@
 import UIKit
 import SnapKit
 
-class ErrorView: UIView {
+final class ErrorView: UIView {
+    
+    // MARK: - UI Elements
+    
+    lazy var tryAgainButton = UIButton()
     
     private lazy var NLOImageView = UIImageView()
     private lazy var titleLabel = UILabel()
     private lazy var subTitleLabel = UILabel()
-    lazy var tryAgainButton = UIButton()
 
+    // MARK: - Initialization
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
@@ -18,8 +23,13 @@ class ErrorView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+// MARK: - Private Methods
+
+private extension ErrorView {
     
-    private func setupUI() {
+    func setupUI() {
         backgroundColor = UIColor(named: "customWhite")
         
         NLOImageView.image = UIImage(named: "NLO")
@@ -43,7 +53,7 @@ class ErrorView: UIView {
         tryAgainButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
     }
     
-    private func setupConstraints() {
+    func setupConstraints() {
         addSubview(NLOImageView)
         NLOImageView.snp.makeConstraints {
             $0.centerX.equalToSuperview()

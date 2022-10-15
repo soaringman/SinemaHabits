@@ -5,24 +5,25 @@ import CloudKit
 final class MainScreenCell: UITableViewCell {
     
     // MARK: - ReuseID
+    
     static let reuseID = "Cell"
+    
     private let mainScreenModel = MainScreenModel()
     
-    // MARK: - UI elements
-    
-    private lazy var filmPoster = UIImageView()
+    // MARK: - UI Elements
     
     var cellImage: UIImage? {
         return filmPoster.image
     }
     
+    private lazy var filmPoster = UIImageView()
     private lazy var filmTitle = UILabel()
     private lazy var filmDescription = UILabel()
     private lazy var filmStartDate = UILabel()
     private lazy var contentStack = UIStackView(arrangedSubviews: [filmTitle, filmDescription, filmStartDate])
     private lazy var circleView = UIView()
     private lazy var ratingTitle = UILabel()
-
+    
     // MARK: - Initialization
     
     override init (style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -31,14 +32,12 @@ final class MainScreenCell: UITableViewCell {
         setupUI()
         setupConstraints()
         prepareForReuse()
- 
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Private methods
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -47,8 +46,51 @@ final class MainScreenCell: UITableViewCell {
         filmStartDate.text = nil
         filmTitle.text = nil
     }
+}
+
+//MARK: - Public Methods
+
+extension MainScreenCell {
     
-    private func setupUI() {
+    func createCircle(startAngle: CGFloat, endAngle: CGFloat) {
+        let segmentPath = createSegment(startAngle: startAngle, endAngle: endAngle)
+        let segmentLayer = CAShapeLayer()
+        
+        segmentLayer.path = segmentPath.cgPath
+        segmentLayer.lineWidth = 6
+        segmentLayer.strokeColor = UIColor.red.cgColor
+        segmentLayer.fillColor = UIColor.clear.cgColor
+        segmentLayer.opacity = 0.7
+        addAnimation(to: segmentLayer)
+        circleView.layer.addSublayer(segmentLayer)
+        
+    }
+    
+    func setupCell(from model: FilmAndTVResult) {
+        filmTitle.text = model.name
+        filmDescription.text = model.overview
+        guard let newDate = mainScreenModel.processDate(string: model.firstAirDate ?? "",
+                                                        fromFormat: "yyyy-MM-dd",
+                                                        toFormat: "dd.MM.yyyy") else {return}
+        filmStartDate.text = "Start date: \(newDate)"
+        ratingTitle.text = String(model.voteAverage)
+        createCircle(startAngle: 0, endAngle: CGFloat(model.voteAverage))
+        DispatchQueue.global().async {
+            let url = "https://image.tmdb.org/t/p/w185\(model.posterPath)"
+            guard let imageUrl = URL(string: url) else { return }
+            guard let imageData = try? Data(contentsOf: imageUrl) else { return }
+            DispatchQueue.main.async {
+                self.filmPoster.image = UIImage(data: imageData)
+            }
+        }
+    }
+}
+
+// MARK: - Private Methods
+
+private extension MainScreenCell {
+    
+    func setupUI() {
         self.selectionStyle = .none
         
         contentStack.axis = .vertical
@@ -75,7 +117,7 @@ final class MainScreenCell: UITableViewCell {
         
     }
     
-    private func setupConstraints() {
+    func setupConstraints() {
         
         contentView.addSubview(filmPoster)
         filmPoster.snp.makeConstraints {
@@ -102,28 +144,14 @@ final class MainScreenCell: UITableViewCell {
         }
     }
     
-    private func createSegment(startAngle: CGFloat, endAngle: CGFloat) -> UIBezierPath {
+    func createSegment(startAngle: CGFloat, endAngle: CGFloat) -> UIBezierPath {
         return UIBezierPath(arcCenter: CGPoint(x: circleView.frame.midX + 32,
                                                y: circleView.frame.midY + 32),
                             radius: 25, startAngle: startAngle.toRadians(),
                             endAngle: endAngle.toRadians(), clockwise: true)
     }
     
-    func createCircle(startAngle: CGFloat, endAngle: CGFloat) {
-        let segmentPath = createSegment(startAngle: startAngle, endAngle: endAngle)
-        let segmentLayer = CAShapeLayer()
-
-        segmentLayer.path = segmentPath.cgPath
-        segmentLayer.lineWidth = 6
-        segmentLayer.strokeColor = UIColor.red.cgColor
-        segmentLayer.fillColor = UIColor.clear.cgColor
-        segmentLayer.opacity = 0.7
-        addAnimation(to: segmentLayer)
-        circleView.layer.addSublayer(segmentLayer)
-
-        }
-    
-    private func addAnimation(to layer: CALayer) {
+    func addAnimation(to layer: CALayer) {
         let drawAnimation = CABasicAnimation(keyPath: "strokeEnd")
         drawAnimation.duration = 0.75
         drawAnimation.repeatCount = 1.0
@@ -132,24 +160,5 @@ final class MainScreenCell: UITableViewCell {
         drawAnimation.toValue = 1
         drawAnimation.timingFunction = CAMediaTimingFunction(name: .easeOut)
         layer.add(drawAnimation, forKey: "drawCircleAnimation")
-    }
-
-    func setupCell(from model: FilmAndTVResult) {
-        filmTitle.text = model.name
-        filmDescription.text = model.overview
-        guard let newDate = mainScreenModel.processDate(string: model.firstAirDate ?? "",
-                                                        fromFormat: "yyyy-MM-dd",
-                                                        toFormat: "dd.MM.yyyy") else {return}
-        filmStartDate.text = "Start date: \(newDate)"
-        ratingTitle.text = String(model.voteAverage)
-        createCircle(startAngle: 0, endAngle: CGFloat(model.voteAverage))
-        DispatchQueue.global().async {
-            let url = "https://image.tmdb.org/t/p/w185\(model.posterPath)"
-            guard let imageUrl = URL(string: url) else { return }
-            guard let imageData = try? Data(contentsOf: imageUrl) else { return }
-            DispatchQueue.main.async {
-                self.filmPoster.image = UIImage(data: imageData)
-            }
-        }
     }
 }

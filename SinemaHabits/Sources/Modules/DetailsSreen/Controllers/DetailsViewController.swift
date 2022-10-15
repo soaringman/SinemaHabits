@@ -1,8 +1,12 @@
 import UIKit
 
-class DetailsViewController: UIViewController {
+final class DetailsViewController: UIViewController {
+    
+    // MARK: - Private Properties
     
     private let detailsView = DetailsView()
+    
+    // MARK: - Life Cicle
 
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(false)
@@ -18,6 +22,8 @@ class DetailsViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    // MARK: - Public Methods
+    
     func setData(model: FilmAndTVResult) {
         navigationItem.title = model.name 
         detailsView.image = model.posterPath
@@ -28,8 +34,13 @@ class DetailsViewController: UIViewController {
         detailsView.releaseFilmDate = "Date: \(newDate)"
         detailsView.descriptionFilm = model.overview
     }
+}
+
+// MARK: - Private Methods
+
+private extension DetailsViewController {
     
-    private func processDate(
+    func processDate(
         string: String,
         fromFormat: String = "ddMMyyyy",
         toFormat: String = "dd MMMM yyyy") -> String? {

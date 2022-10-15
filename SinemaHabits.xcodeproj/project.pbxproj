@@ -60,14 +60,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1120BE7A28C20DBC009D560F /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				9FE3AC0728C34B45002FD7C9 /* NetworkMonitor.swift */,
-			);
-			path = Utils;
-			sourceTree = "<group>";
-		};
 		1184A27A28BD2F75000D9497 = {
 			isa = PBXGroup;
 			children = (
@@ -89,23 +81,20 @@
 		1184A28528BD2F75000D9497 /* SinemaHabits */ = {
 			isa = PBXGroup;
 			children = (
-				1184A28628BD2F75000D9497 /* AppDelegate.swift */,
-				1184A29E28BD313C000D9497 /* Modules */,
-				1184A29D28BD3088000D9497 /* Network */,
-				1120BE7A28C20DBC009D560F /* Utils */,
+				11B823D328FA986C0003F7DF /* Sources */,
 				1184A2A928BD32F1000D9497 /* Resources */,
 			);
 			path = SinemaHabits;
 			sourceTree = "<group>";
 		};
-		1184A29D28BD3088000D9497 /* Network */ = {
+		1184A29D28BD3088000D9497 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				9F3BDD2F28BE87FA00E3F988 /* NetworkManager.swift */,
-				9FA30D7428BF78EC00F76C62 /* CinemaDataModel.swift */,
-				9FA30D7628BFA62800F76C62 /* Api.swift */,
+				11B823D728FA995B0003F7DF /* Core */,
+				11B823D628FA99120003F7DF /* Networking */,
+				11B823D528FA98FC0003F7DF /* DTO */,
 			);
-			path = Network;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		1184A29E28BD313C000D9497 /* Modules */ = {
@@ -195,6 +184,49 @@
 				11A8E49E28BE320F0016ED51 /* SearchErrorView.swift */,
 			);
 			path = ErrorView;
+			sourceTree = "<group>";
+		};
+		11B823D328FA986C0003F7DF /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				1184A29D28BD3088000D9497 /* Services */,
+				1184A29E28BD313C000D9497 /* Modules */,
+				11B823D428FA98830003F7DF /* Application */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		11B823D428FA98830003F7DF /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				1184A28628BD2F75000D9497 /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		11B823D528FA98FC0003F7DF /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				9FA30D7428BF78EC00F76C62 /* CinemaDataModel.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		11B823D628FA99120003F7DF /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				9FE3AC0728C34B45002FD7C9 /* NetworkMonitor.swift */,
+				9FA30D7628BFA62800F76C62 /* Api.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		11B823D728FA995B0003F7DF /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				9F3BDD2F28BE87FA00E3F988 /* NetworkManager.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		340952BC75ECDA2D26743223 /* Pods */ = {

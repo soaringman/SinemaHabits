@@ -1,7 +1,9 @@
 import Foundation
 import SnapKit
 
-class MainScreenModel {
+final class MainScreenModel {
+    
+    //MARK: - Public Methods
     
     func processDate(string: String, fromFormat: String = "ddMMyyyy", toFormat: String = "dd MMMM yyyy") -> String? {
         let formatter = DateFormatter()
@@ -13,6 +15,8 @@ class MainScreenModel {
         return formatter.string(from: date)
     }
 }
+
+// MARK: - CGFloat
 
 extension CGFloat {
     func toRadians() -> CGFloat {
