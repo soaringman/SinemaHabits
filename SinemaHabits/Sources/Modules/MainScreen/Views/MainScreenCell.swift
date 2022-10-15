@@ -10,7 +10,7 @@ final class MainScreenCell: UITableViewCell {
     
     private let mainScreenModel = MainScreenModel()
     
-    // MARK: - UI elements
+    // MARK: - UI Elements
     
     var cellImage: UIImage? {
         return filmPoster.image
