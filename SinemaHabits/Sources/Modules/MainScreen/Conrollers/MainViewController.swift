@@ -1,9 +1,9 @@
 import UIKit
 import SnapKit
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     
-    // MARK: - Private properties
+    // MARK: - Private Properties
     
     private lazy var searchText: String = ""
     private lazy var mainView = MainView()
@@ -12,7 +12,7 @@ class MainViewController: UIViewController {
     private var cinemaDataModel: [FilmAndTVResult] = []
     private var detailsViewController = DetailsViewController()
     
-    // MARK: - Life cicle
+    // MARK: - Life Cicle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,62 +21,10 @@ class MainViewController: UIViewController {
         setupSearchBar()
         getData()
         refresh()
-        
-        mainView.errorView.tryAgainButton.addTarget(self, action:
-                                                        #selector(MainViewController().tryAgainButtonClicked(_:)),
-                                                    for: .touchUpInside)
+        setTargets()
     }
     
-    // MARK: - Private methods
-    
-    private func setupUI() {
-        
-        self.view = mainView
-    }
-    
-    private func setupDelegates() {
-        mainView.searchController.searchBar.delegate = self
-        mainView.tableView.dataSource = self
-        mainView.tableView.delegate = self
-    }
-    
-    private func setupSearchBar() {
-        
-        self.navigationItem.titleView = mainView.titleLabel
-        self.navigationItem.searchController = mainView.searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        
-    }
- 
-    private func getData() {
-        
-        let baseURL = api.baseURL
-        //       let pageURL = "?page=\(pageNumber)"
-        networkManager.fetchData(url: baseURL)
-        networkManager.delegate = self
-    }
-    
-    private func refresh() {
-        mainView.refresh = {
-            
-            [weak self] in
-            guard let self = self else { return }
-            
-            if self.isInternetAvailable() {
-                self.getData()
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                    self.mainView.refreshControl.endRefreshing()
-                })
-            } else {
-                self.mainView.refreshControl.endRefreshing()
-                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
-                    self.mainView.setupErrorView()
-                })
-            }
-        }
-    }
-
-    // MARK: - Computed properties
+    // MARK: - Computed Properties
     
     private var filteredCinema: [FilmAndTVResult] {
         return cinemaDataModel
@@ -84,16 +32,9 @@ class MainViewController: UIViewController {
                 $0.name?.starts(with: searchText) ?? false
             })
     }
-    
-    // MARK: - Actions
-    
-    @objc private func tryAgainButtonClicked(_ sender: UIButton) {
-        getData()
-        mainView.setupTable()
-    }
 }
 
-    // MARK: - Extensions
+// MARK: - UISearchBarDelegate
 
 extension MainViewController: UISearchBarDelegate {
     
@@ -121,13 +62,9 @@ extension MainViewController: UISearchBarDelegate {
     }
 }
 
-    // MARK: - UITableViewDataSource
+// MARK: - UITableViewDelegate
 
-extension MainViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredCinema.count
-    }
+extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -135,10 +72,10 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
             withIdentifier: MainScreenCell.reuseID,
             for: indexPath) as? MainScreenCell {
             
-                let data = filteredCinema[indexPath.row]
-                cell.setupCell(from: data)
-                return cell
-            }
+            let data = filteredCinema[indexPath.row]
+            cell.setupCell(from: data)
+            return cell
+        }
         return UITableViewCell()
     }
     
@@ -146,13 +83,22 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         detailsViewController.setData(model: cinemaDataModel[indexPath.row])
         navigationController?.pushViewController(detailsViewController, animated: true)
     }
+}
+
+// MARK: - UITableViewDataSource
+
+extension MainViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filteredCinema.count
+    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 210
     }
 }
 
-    // MARK: - NetworkManagerDelegate
+// MARK: - NetworkManagerDelegate
 
 extension MainViewController: NetworkManagerDelegate {
     func showData(results: [FilmAndTVResult]) {
@@ -162,5 +108,72 @@ extension MainViewController: NetworkManagerDelegate {
     
     func showError() {
         print("Ошибка получения данных")
+    }
+}
+
+// MARK: - Actions
+
+@objc
+private extension MainViewController {
+    
+    @objc private func tryAgainButtonClicked(_ sender: UIButton) {
+        getData()
+        mainView.setupTable()
+    }
+}
+
+// MARK: - Private Methods
+
+private extension MainViewController {
+    
+    func setTargets() {
+        mainView.errorView.tryAgainButton.addTarget(self, action:
+                                                        #selector(MainViewController().tryAgainButtonClicked(_:)),
+                                                    for: .touchUpInside)
+    }
+    
+    func setupUI() {
+        self.view = mainView
+    }
+    
+    func setupDelegates() {
+        mainView.searchController.searchBar.delegate = self
+        mainView.tableView.dataSource = self
+        mainView.tableView.delegate = self
+    }
+    
+    func setupSearchBar() {
+        
+        self.navigationItem.titleView = mainView.titleLabel
+        self.navigationItem.searchController = mainView.searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
+    }
+    
+    func getData() {
+        
+        let baseURL = api.baseURL
+        networkManager.fetchData(url: baseURL)
+        networkManager.delegate = self
+    }
+    
+    func refresh() {
+        mainView.refresh = {
+            
+            [weak self] in
+            guard let self = self else { return }
+            
+            if self.isInternetAvailable() {
+                self.getData()
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                    self.mainView.refreshControl.endRefreshing()
+                })
+            } else {
+                self.mainView.refreshControl.endRefreshing()
+                DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                    self.mainView.setupErrorView()
+                })
+            }
+        }
     }
 }
