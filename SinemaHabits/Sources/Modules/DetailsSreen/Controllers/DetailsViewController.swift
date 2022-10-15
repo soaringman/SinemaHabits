@@ -1,6 +1,6 @@
 import UIKit
 
-class DetailsViewController: UIViewController {
+final class DetailsViewController: UIViewController {
     
     // MARK: - Private Properties
     
