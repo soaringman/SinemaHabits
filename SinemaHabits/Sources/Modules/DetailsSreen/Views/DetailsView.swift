@@ -34,6 +34,8 @@ final class DetailsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Public Methods
+    
     func setupUI() {
         
         backgroundColor = UIColor(named: "backGroudColor")
@@ -96,6 +98,8 @@ private extension DetailsView {
         }
     }
 }
+
+// MARK: - CGFload
 
 private extension CGFloat {
     static let leadingTrailing: CGFloat = 20
