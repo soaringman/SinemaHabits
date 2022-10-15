@@ -1,11 +1,15 @@
 import UIKit
 
-class SearchErrorView: UIView {
+final class SearchErrorView: UIView {
+    
+    // MARK: - UI Elements
     
     private let loupe = UIImageView()
     private let searchErrorLabel = UILabel()
     private let tryToCorrectLabel = UILabel()
-
+    
+    // MARK: - Initialization
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -15,8 +19,13 @@ class SearchErrorView: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+// MARK: - Private Methods
+
+private extension SearchErrorView {
     
-    private func setupUI() {
+    func setupUI() {
         backgroundColor = UIColor(named: "customWhite")
         
         loupe.image = UIImage(named: "loupe")
@@ -34,7 +43,7 @@ class SearchErrorView: UIView {
         tryToCorrectLabel.textAlignment = .center
     }
     
-    private func setupConstraints() {
+    func setupConstraints() {
         addSubview(loupe)
         loupe.snp.makeConstraints {
             $0.centerX.equalToSuperview()
