@@ -1,7 +1,7 @@
 import Foundation
 import SnapKit
 
-class MainScreenModel {
+final class MainScreenModel {
     
     //MARK: - Public Methods
     
